@@ -25,7 +25,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         public void JwtTokenShouldBeInRightFormat()
         {
             var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
-            var messageBody = "this body is taken into account in the signature and payload";
+            var messageBody = "SOME BODY";
             message.Content = new StringContent(messageBody, Encoding.UTF8);
             _jwtTokenGenerator.GenerateJwtToken(message);
 
