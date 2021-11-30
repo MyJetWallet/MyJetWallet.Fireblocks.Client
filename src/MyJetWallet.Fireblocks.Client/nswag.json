@@ -10,7 +10,7 @@
   },
   "codeGenerators": {
     "openApiToCSharpClient": {
-      "clientBaseClass": "",
+      "clientBaseClass": "BaseClient",
       "configurationClass": "ClientConfigurator",
       "generateClientClasses": true,
       "generateClientInterfaces": true,

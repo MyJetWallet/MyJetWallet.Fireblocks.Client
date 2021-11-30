@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 namespace MyJetWallet.Fireblocks.Client.DelegateHandlers
 {
     //TODO: Complete logging and telemetry
-    internal class LoggingHandler : DelegatingHandler
+    internal class DelegateHandlerLogger : DelegatingHandler
     {
-        public LoggingHandler()
+        public DelegateHandlerLogger()
         {
         }
 

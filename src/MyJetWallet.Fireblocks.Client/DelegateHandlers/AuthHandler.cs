@@ -6,17 +6,17 @@ namespace MyJetWallet.Fireblocks.Client.DelegateHandlers
 {
     internal class AuthHandler : DelegatingHandler
     {
-        private readonly ApiKeyHeaderGenerator _apiKeyCredentialsProvider;
+        private readonly ApiKeyHeaderGenerator _apiKeyHeaderGenerator;
 
-        public AuthHandler(ApiKeyHeaderGenerator apiKeyCredentialsProvider)
+        public AuthHandler(ApiKeyHeaderGenerator apiKeyHeaderGenerator)
         {
-            this._apiKeyCredentialsProvider = apiKeyCredentialsProvider;
+            this._apiKeyHeaderGenerator = apiKeyHeaderGenerator;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
-            await _apiKeyCredentialsProvider.AddCredentialsAsync(request);
+            await _apiKeyHeaderGenerator.AddCredentialsAsync(request);
             var response = await base.SendAsync(request, cancellationToken);
 
             return response;

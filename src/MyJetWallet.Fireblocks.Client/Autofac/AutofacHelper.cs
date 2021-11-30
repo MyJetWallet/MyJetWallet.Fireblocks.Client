@@ -1,16 +1,25 @@
 ﻿using Autofac;
 using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.DelegateHandlers;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 
 namespace MyJetWallet.Fireblocks.Client.Autofac
 {
     public static class AutofacHelper
     {
-        public static void RegisterIndexInstructionsClient(this ContainerBuilder builder, ClientConfigurator clientConfigurator)
+        public static void RegisterFireblocksClient(this ContainerBuilder builder, ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)
         {
             var auth = new ApiKeyHeaderGenerator(clientConfigurator, new JwtTokenGenerator(clientConfigurator));
-            var httpClient = HttpClientFactory.Create(new AuthHandler(auth), new LoggingHandler());
+            var handlersWithAuth = new List<DelegatingHandler> { new AuthHandler(auth) };
+
+            if (handlers != null && handlers.Any())
+            {
+                handlersWithAuth.AddRange(handlers);
+            }
+
+            var httpClient = HttpClientFactory.Create(handlersWithAuth.ToArray());
 
             builder
                 .RegisterInstance(new VaultClient(clientConfigurator, httpClient))
