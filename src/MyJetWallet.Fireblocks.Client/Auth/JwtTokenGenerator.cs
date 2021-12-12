@@ -36,7 +36,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
                 {"nonce", nonce},
                 {"iat", issuedTimestamp},
                 {"exp", expirationTimestamp},
-                {"sub", _fireblocksConfiguration.ApiPubKey},
+                {"sub", _fireblocksConfiguration.ApiKey},
                 {"bodyHash", hashBody}
             };
         }

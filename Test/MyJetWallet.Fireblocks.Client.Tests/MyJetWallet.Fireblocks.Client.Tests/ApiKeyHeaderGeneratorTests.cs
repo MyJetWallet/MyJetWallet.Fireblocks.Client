@@ -24,7 +24,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         [Fact]
         public void AddCredentialsAuthHeaderShouldBeAdded()
         {
-            var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
+            var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate1") };
 
             _provider.AddCredentials(message);
 

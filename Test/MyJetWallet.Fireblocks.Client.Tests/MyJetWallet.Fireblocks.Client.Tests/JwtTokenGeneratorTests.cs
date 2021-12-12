@@ -24,7 +24,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         [Fact]
         public void JwtTokenShouldBeInRightFormat()
         {
-            var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate") };
+            var message = new HttpRequestMessage { RequestUri = new Uri("https://test.com/test1/validate1") };
             var messageBody = "SOME BODY";
             message.Content = new StringContent(messageBody, Encoding.UTF8);
             _jwtTokenGenerator.GenerateJwtToken(message);
@@ -42,7 +42,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
             var payload = retrievedToken.Payload;
             //Assert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds()), payload.Iat);
             //Assert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds() + 20), payload.Exp);
-            Assert.Equal(Configuration.ApiPubKey, payload.Sub);
+            Assert.Equal(Configuration.ApiKey, payload.Sub);
 
             Assert.True(payload.TryGetValue("nonce", out var retrievedNonce));
             //Assert.Equal(_nonce.ToUnixTimeMilliseconds(), retrievedNonce);

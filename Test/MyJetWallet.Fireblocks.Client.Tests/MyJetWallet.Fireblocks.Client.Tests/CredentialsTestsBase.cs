@@ -20,7 +20,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
             {
                 BaseUrl = "https://api.fireblocks.io/v1",
                 ApiPrivateKey = RsaPrivatePcs8PrivateKey,
-                ApiPubKey = "pubKey"
+                ApiKey = "pubKey"
             };
         }
     }

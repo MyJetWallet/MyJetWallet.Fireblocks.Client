@@ -27,7 +27,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             var token = _jwtTokenGenerator.GenerateJwtToken(msg);
             msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
-            msg.Headers.Add(ApiKeyHeader, _configuration.ApiPubKey);
+            msg.Headers.Add(ApiKeyHeader, _configuration.ApiKey);
         }
 
         public Task AddCredentialsAsync(HttpRequestMessage msg)
