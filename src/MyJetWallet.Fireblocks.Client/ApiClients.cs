@@ -1027,7 +1027,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Gets the public key information for vault account</summary>
         /// <returns>Public Key Information</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<PublicKeyInformation>> Public_key_infoAsync(string vaultAccountId, string assetId, double change, double addressIndex, bool? compressed = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<PublicKeyInformation>> Public_key_infoAsync(string vaultAccountId, string assetId, decimal change, decimal addressIndex, bool? compressed = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -1863,7 +1863,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Gets the public key information for vault account</summary>
         /// <returns>Public Key Information</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<PublicKeyInformation>> Public_key_infoAsync(string vaultAccountId, string assetId, double change, double addressIndex, bool? compressed = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<PublicKeyInformation>> Public_key_infoAsync(string vaultAccountId, string assetId, decimal change, decimal addressIndex, bool? compressed = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
@@ -8653,7 +8653,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string EnterpriseAddress { get; set; }
     
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44AddressIndex { get; set; }
+        public decimal Bip44AddressIndex { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -8683,7 +8683,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string Tag { get; set; }
     
         [Newtonsoft.Json.JsonProperty("bip44AddressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44AddressIndex { get; set; }
+        public decimal Bip44AddressIndex { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9061,7 +9061,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class AuthorizationGroups 
     {
         [Newtonsoft.Json.JsonProperty("th", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Th { get; set; }
+        public decimal Th { get; set; }
     
         [Newtonsoft.Json.JsonProperty("users", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, Anonymous> Users { get; }
@@ -9150,40 +9150,40 @@ namespace MyJetWallet.Fireblocks.Client
     
         /// <summary>The amount requested by the user</summary>
         [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double RequestedAmount { get; set; }
+        public decimal RequestedAmount { get; set; }
     
         /// <summary>If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount</summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     
         /// <summary>The net amount of the transaction, after fee deduction</summary>
         [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetAmount { get; set; }
+        public decimal NetAmount { get; set; }
     
         /// <summary>The USD value of the requested amount</summary>
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double AmountUSD { get; set; }
+        public decimal AmountUSD { get; set; }
     
         /// <summary>The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)</summary>
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double ServiceFee { get; set; }
+        public decimal ServiceFee { get; set; }
     
         /// <summary>Deprecated - replaced by "networkFee"</summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
-        public double Fee { get; set; }
+        public decimal Fee { get; set; }
     
         /// <summary>The fee paid to the network</summary>
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkFee { get; set; }
+        public decimal NetworkFee { get; set; }
     
         /// <summary>Unix timestamp</summary>
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CreatedAt { get; set; }
+        public decimal CreatedAt { get; set; }
     
         /// <summary>Unix timestamp</summary>
         [Newtonsoft.Json.JsonProperty("lastUpdated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double LastUpdated { get; set; }
+        public decimal LastUpdated { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -9246,7 +9246,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string CustomerRefId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; set; }
+        public decimal NumOfConfirmations { get; set; }
     
         [Newtonsoft.Json.JsonProperty("amountInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public AmountInfo AmountInfo { get; set; }
@@ -9273,7 +9273,7 @@ namespace MyJetWallet.Fireblocks.Client
         public AuthorizationInfo AuthorizationInfo { get; set; }
     
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Index { get; set; }
+        public decimal Index { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9355,7 +9355,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string AmountUSD { get; set; }
     
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Index { get; set; }
+        public decimal Index { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9392,7 +9392,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string NativeAsset { get; set; }
     
         [Newtonsoft.Json.JsonProperty("decimals", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Decimals { get; set; }
+        public decimal Decimals { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -9617,12 +9617,12 @@ namespace MyJetWallet.Fireblocks.Client
         public DestinationTransferPeerPath Destination { get; set; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     
         /// <summary>- For BTC based assets, the fee per bytes in the asset's smallest unit (Satoshi/Latoshi etc.)
         /// <br/>- For XRP, the fee for the transaction</summary>
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Fee { get; set; }
+        public decimal? Fee { get; set; }
     
         [Newtonsoft.Json.JsonProperty("feeLevel", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -9642,13 +9642,13 @@ namespace MyJetWallet.Fireblocks.Client
     
         /// <summary>For ETH based asset only. this will be used instead of the fee property. Value is in gwei</summary>
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? GasPrice { get; set; }
+        public decimal? GasPrice { get; set; }
     
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? GasLimit { get; set; }
+        public decimal? GasLimit { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? NetworkFee { get; set; }
+        public decimal? NetworkFee { get; set; }
     
         [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Note { get; set; }
@@ -9657,10 +9657,10 @@ namespace MyJetWallet.Fireblocks.Client
         public bool AutoStaking { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkStaking", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NetworkStaking { get; set; }
+        public decimal NetworkStaking { get; set; }
     
         [Newtonsoft.Json.JsonProperty("cpuStaking", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CpuStaking { get; set; }
+        public decimal CpuStaking { get; set; }
     
         [Newtonsoft.Json.JsonProperty("extraParameters", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object ExtraParameters { get; set; }
@@ -9849,7 +9849,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string Error1 { get; set; }
     
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Code { get; set; }
+        public decimal Code { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -10182,7 +10182,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class SetConfirmationsThresholdRequest 
     {
         [Newtonsoft.Json.JsonProperty("numOfConfirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double NumOfConfirmations { get; set; }
+        public decimal NumOfConfirmations { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -10270,13 +10270,13 @@ namespace MyJetWallet.Fireblocks.Client
         public string Content { get; set; }
     
         [Newtonsoft.Json.JsonProperty("bip44addressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44addressIndex { get; set; }
+        public decimal Bip44addressIndex { get; set; }
     
         [Newtonsoft.Json.JsonProperty("bip44change", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44change { get; set; }
+        public decimal Bip44change { get; set; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<decimal> DerivationPath { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -10301,7 +10301,7 @@ namespace MyJetWallet.Fireblocks.Client
         public SignedMessageAlgorithm Algorithm { get; set; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<decimal> DerivationPath { get; set; }
     
         [Newtonsoft.Json.JsonProperty("signature", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Signature Signature { get; set; }
@@ -10328,7 +10328,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string Algorithm { get; set; }
     
         [Newtonsoft.Json.JsonProperty("derivationPath", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<double> DerivationPath { get; set; }
+        public System.Collections.Generic.List<decimal> DerivationPath { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PublicKey { get; set; }
@@ -10465,7 +10465,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class ResendWebhooksResponse 
     {
         [Newtonsoft.Json.JsonProperty("webhooksCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double WebhooksCount { get; set; }
+        public decimal WebhooksCount { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -10519,7 +10519,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string Amount { get; set; }
     
         [Newtonsoft.Json.JsonProperty("confirmations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Confirmations { get; set; }
+        public decimal Confirmations { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Status { get; set; }
@@ -10920,7 +10920,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class Body16 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -10938,7 +10938,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class Body17 
     {
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -11312,7 +11312,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string S { get; set; }
     
         [Newtonsoft.Json.JsonProperty("v", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double V { get; set; }
+        public decimal V { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     

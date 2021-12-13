@@ -61,7 +61,7 @@ namespace TestApp
             //    Description = "Created for test",
             //});
 
-            double amount = 0;
+            decimal amount = 0;
             while (amount == 0)
             {
                 var acc = await vaultClient.AccountsGetAsync(vaultAccountId, default);
@@ -73,7 +73,7 @@ namespace TestApp
                     continue;
                 }
 
-                amount = double.Parse(available);
+                amount = decimal.Parse(available);
                 break;
             }
 
