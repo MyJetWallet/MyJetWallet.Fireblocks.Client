@@ -13,18 +13,22 @@ namespace MyJetWallet.Fireblocks.Client.Auth
 
         private readonly ClientConfigurator _configuration;
         private readonly JwtTokenGenerator _jwtTokenGenerator;
+        private readonly KeyActivator _keyActivator;
         private readonly CancellationTokenSource _tokenSource;
 
-        public ApiKeyHeaderGenerator(ClientConfigurator configuration, JwtTokenGenerator jwtTokenGenerator)
+        public ApiKeyHeaderGenerator(ClientConfigurator configuration, JwtTokenGenerator jwtTokenGenerator, KeyActivator keyActivator)
         {
             _configuration = configuration;
             _jwtTokenGenerator = jwtTokenGenerator;
-
+            _keyActivator = keyActivator;
             _tokenSource = new CancellationTokenSource();
+            keyActivator.KeyActivatedEvent += Activate;
         }
 
         public void AddCredentials(HttpRequestMessage msg)
         {
+            if (!_keyActivator.IsActivated)
+                throw new Exception("Api key is not activated!");
             var token = _jwtTokenGenerator.GenerateJwtToken(msg);
             msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
             msg.Headers.Add(ApiKeyHeader, _configuration.ApiKey);
@@ -43,10 +47,16 @@ namespace MyJetWallet.Fireblocks.Client.Auth
             _tokenSource.Dispose();
         }
 
+        internal void Activate(object sender, string apiKey, string privcateKey)
+        {
+            _configuration.ApiKey = apiKey;
+        }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+            _keyActivator.KeyActivatedEvent -= Activate;
         }
     }
 }

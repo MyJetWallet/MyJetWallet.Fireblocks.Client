@@ -17,8 +17,14 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         public ApiKeyHeaderGeneratorTests(RsaKeyFixture fixture, ITestOutputHelper output)
             : base(fixture, output)
         {
-            _tokenGenerator = new JwtTokenGenerator(Configuration);
-            _provider = new ApiKeyHeaderGenerator(Configuration, _tokenGenerator);
+            _tokenGenerator = new JwtTokenGenerator(Configuration, new KeyActivator()
+            {
+                IsActivated = true,
+            });
+            _provider = new ApiKeyHeaderGenerator(Configuration, _tokenGenerator, new KeyActivator()
+            {
+                IsActivated = true,
+            });
         }
 
         [Fact]

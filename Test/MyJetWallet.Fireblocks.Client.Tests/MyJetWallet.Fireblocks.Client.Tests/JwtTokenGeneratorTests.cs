@@ -17,7 +17,10 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         public JwtTokenGeneratorTests(RsaKeyFixture fixture, ITestOutputHelper output)
             : base(fixture, output)
         {
-            _jwtTokenGenerator = new JwtTokenGenerator(Configuration);
+            _jwtTokenGenerator = new JwtTokenGenerator(Configuration, new KeyActivator()
+            {
+                 IsActivated = true,
+            });
         }
 
 

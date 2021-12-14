@@ -41,13 +41,13 @@ namespace TestApp
 
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
 
-            //var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
+            var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
             var allAccounts = await vaultClient.AccountsGetAsync();
             var vaultAccountId = "3";
 
-            //var walletCreate = await vaultClient.AccountsPostAsync(vaultAccountId, ethTestAsset.Id, new Body5()
-            //{
-            //});
+            var walletCreate = await vaultClient.AccountsPostAsync(vaultAccountId, ethTestAsset.Id, new Body5()
+            {
+            });
 
             var wallet = await vaultClient.AccountsGetAsync(vaultAccountId, ethTestAsset.Id, default);
             var address = await accountsClient.AddressesGetAsync(vaultAccountId, ethTestAsset.Id, default);
@@ -56,10 +56,10 @@ namespace TestApp
             //{
             //    Description = "Created for test",
             //});
-            //var createAddressRequest = await accountsClient.AddressesPostAsync(vaultAccountId, ethTestAsset.Id, new Body6
-            //{
-            //    Description = "Created for test",
-            //});
+            var createAddressRequest = await accountsClient.AddressesPostAsync(vaultAccountId, ethTestAsset.Id, new Body6
+            {
+                Description = "Created for test",
+            });
 
             decimal amount = 0;
             while (amount == 0)

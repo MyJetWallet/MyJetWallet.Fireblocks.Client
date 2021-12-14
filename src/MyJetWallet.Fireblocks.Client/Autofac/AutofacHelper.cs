@@ -9,10 +9,18 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
 {
     public static class AutofacHelper
     {
-        public static void RegisterFireblocksClient(this ContainerBuilder builder, ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)
+        public static void RegisterFireblocksClient(this ContainerBuilder builder, 
+            ClientConfigurator clientConfigurator, 
+            params DelegatingHandler[] handlers)
         {
-            var auth = new ApiKeyHeaderGenerator(clientConfigurator, new JwtTokenGenerator(clientConfigurator));
+            var keyActivator = new KeyActivator();
+
+            var auth = new ApiKeyHeaderGenerator(clientConfigurator, new JwtTokenGenerator(clientConfigurator, keyActivator), keyActivator);
             var handlersWithAuth = new List<DelegatingHandler> { new AuthHandler(auth) };
+
+            if (string.IsNullOrEmpty(clientConfigurator.ApiPrivateKey) &&
+                string.IsNullOrEmpty(clientConfigurator.ApiKey))
+                keyActivator.IsActivated = false;
 
             if (handlers != null && handlers.Any())
             {
@@ -20,6 +28,8 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
             }
 
             var httpClient = HttpClientFactory.Create(handlersWithAuth.ToArray());
+
+            builder.RegisterInstance(keyActivator);
 
             builder
                 .RegisterInstance(new VaultClient(clientConfigurator, httpClient))
