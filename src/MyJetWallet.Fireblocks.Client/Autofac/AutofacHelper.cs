@@ -29,7 +29,7 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
 
             var httpClient = HttpClientFactory.Create(handlersWithAuth.ToArray());
 
-            builder.RegisterInstance(keyActivator);
+            builder.RegisterInstance(keyActivator).SingleInstance();
 
             builder
                 .RegisterInstance(new VaultClient(clientConfigurator, httpClient))
