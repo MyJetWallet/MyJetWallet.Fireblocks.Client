@@ -15,6 +15,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
 
         public void ActivateKeys(string apiKey, string privateKey)
         {
+            IsActivated = true;
             KeyActivatedEvent.Invoke(this, apiKey, privateKey);
         }
 
