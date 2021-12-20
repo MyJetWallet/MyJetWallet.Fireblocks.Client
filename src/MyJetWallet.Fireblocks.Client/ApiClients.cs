@@ -62,7 +62,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="assetId">The ID of the asset</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<CreateVaultAssetResponse>> AccountsPostAsync(string vaultAccountId, string assetId, Body5 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<CreateVaultAssetResponse>> AccountsPostAsync(string idempotencyKey, string vaultAccountId, string assetId, Body5 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets the public key information based on derivationPath and signing algorithm</summary>
@@ -523,7 +523,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="assetId">The ID of the asset</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<CreateVaultAssetResponse>> AccountsPostAsync(string vaultAccountId, string assetId, Body5 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<CreateVaultAssetResponse>> AccountsPostAsync(string idempotencyKey, string vaultAccountId, string assetId, Body5 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
@@ -547,7 +547,8 @@ namespace MyJetWallet.Fireblocks.Client
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
-    
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();

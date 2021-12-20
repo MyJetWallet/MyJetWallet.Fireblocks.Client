@@ -47,7 +47,7 @@ namespace TestApp
             var allAccounts = await vaultClient.AccountsGetAsync();
             var vaultAccountId = "1";
 
-            var walletCreate = await vaultClient.AccountsPostAsync(vaultAccountId, ethTestAsset.Id, new Body5()
+            var walletCreate = await vaultClient.AccountsPostAsync("1", vaultAccountId, ethTestAsset.Id, new Body5()
             {
             });
 
