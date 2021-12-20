@@ -22,7 +22,6 @@ namespace MyJetWallet.Fireblocks.Client.Auth
             _jwtTokenGenerator = jwtTokenGenerator;
             _keyActivator = keyActivator;
             _tokenSource = new CancellationTokenSource();
-            keyActivator.KeyActivatedEvent += Activate;
         }
 
         public void AddCredentials(HttpRequestMessage msg)
@@ -47,16 +46,10 @@ namespace MyJetWallet.Fireblocks.Client.Auth
             _tokenSource.Dispose();
         }
 
-        internal void Activate(object sender, string apiKey, string privcateKey)
-        {
-            _configuration.ApiKey = apiKey;
-        }
-
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-            _keyActivator.KeyActivatedEvent -= Activate;
         }
     }
 }

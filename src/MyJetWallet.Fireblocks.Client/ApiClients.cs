@@ -4,6 +4,7 @@
 // </auto-generated>
 //----------------------
 
+using MyJetWallet.Fireblocks.Client.Extensions;
 using System.Threading;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -31,7 +32,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Creates a new vault account</summary>
         /// <returns>A Vault Account object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<VaultAccount>> AccountsPostAsync(Body body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<VaultAccount>> AccountsPostAsync(string idempotencyKey, Body body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Returns a Fireblock Vault account by ID</summary>
@@ -203,7 +204,8 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Creates a new vault account</summary>
         /// <returns>A Vault Account object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<VaultAccount>> AccountsPostAsync(Body body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<VaultAccount>> AccountsPostAsync(string idempotencyKey, Body body, 
+            System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -222,7 +224,9 @@ namespace MyJetWallet.Fireblocks.Client
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
-    
+
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();
@@ -1004,7 +1008,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="assetId">The ID of the asset</param>
         /// <returns>The created address</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<CreateAddressResponse>> AddressesPostAsync(string vaultAccountId, string assetId, Body6 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<CreateAddressResponse>> AddressesPostAsync(string idempotencyKey, string vaultAccountId, string assetId, Body6 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Update the description of an existing address within a vault wallet</summary>
@@ -1614,7 +1618,8 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="assetId">The ID of the asset</param>
         /// <returns>The created address</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<CreateAddressResponse>> AddressesPostAsync(string vaultAccountId, string assetId, Body6 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<CreateAddressResponse>> AddressesPostAsync(string idempotencyKey,
+            string vaultAccountId, string assetId, Body6 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (vaultAccountId == null)
                 throw new System.ArgumentNullException("vaultAccountId");
@@ -1638,7 +1643,8 @@ namespace MyJetWallet.Fireblocks.Client
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
-    
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();

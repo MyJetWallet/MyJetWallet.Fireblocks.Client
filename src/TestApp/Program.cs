@@ -14,10 +14,12 @@ namespace TestApp
     {
         static async Task Main(string[] args)
         {
-            var privateKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_secret.key");
+            //var privateKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_secret.key");
+            var privateKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_secret.key");
             privateKey = privateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
             privateKey = privateKey.Replace("-----END PRIVATE KEY-----", "");
-            var publicKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_api_key");
+            var publicKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_api_key");
+            //var publicKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_api_key");
             var container = new ContainerBuilder();
             var config = new ClientConfigurator()
             {
@@ -41,9 +43,9 @@ namespace TestApp
 
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
 
-            var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
+            //var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
             var allAccounts = await vaultClient.AccountsGetAsync();
-            var vaultAccountId = "3";
+            var vaultAccountId = "1";
 
             var walletCreate = await vaultClient.AccountsPostAsync(vaultAccountId, ethTestAsset.Id, new Body5()
             {
@@ -56,10 +58,10 @@ namespace TestApp
             //{
             //    Description = "Created for test",
             //});
-            var createAddressRequest = await accountsClient.AddressesPostAsync(vaultAccountId, ethTestAsset.Id, new Body6
-            {
-                Description = "Created for test",
-            });
+            //var createAddressRequest = await accountsClient.AddressesPostAsync(vaultAccountId, ethTestAsset.Id, new Body6
+            //{
+            //    Description = "Created for test",
+            //});
 
             decimal amount = 0;
             while (amount == 0)
@@ -88,11 +90,12 @@ namespace TestApp
                 },
                 Destination = new DestinationTransferPeerPath()
                 {
-                    Type = TransferPeerPathType.ONE_TIME_ADDRESS,
-                    OneTimeAddress = new OneTimeAddress()
-                    {
-                        Address = "0x1Eab7d412a25a5d00Ec3d04648aa54CeA4aB7e94"
-                    },
+                    Type = TransferPeerPathType.VAULT_ACCOUNT,
+                    Id = "3",
+                    //OneTimeAddress = new OneTimeAddress()
+                    //{
+                    //    Address = "0x1Eab7d412a25a5d00Ec3d04648aa54CeA4aB7e94"
+                    //},
                 },
                 FailOnLowFee = false,
                 FeeLevel = TransactionRequestFeeLevel.MEDIUM,
