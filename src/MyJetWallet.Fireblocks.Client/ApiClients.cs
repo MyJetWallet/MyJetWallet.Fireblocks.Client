@@ -11120,7 +11120,10 @@ namespace MyJetWallet.Fireblocks.Client
     
         [System.Runtime.Serialization.EnumMember(Value = @"ONE_TIME_ADDRESS")]
         ONE_TIME_ADDRESS = 8,
-    
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"UNKNOWN")]
+        UNKNOWN = 9,
+
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
