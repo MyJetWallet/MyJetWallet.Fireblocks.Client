@@ -2548,7 +2548,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Creates a new transaction</summary>
         /// <returns>A transaction object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<CreateTransactionResponse>> TransactionsPostAsync(TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<CreateTransactionResponse>> TransactionsPostAsync(string idempotencyKey, TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Returns a transaction by ID</summary>
@@ -4252,7 +4252,8 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Creates a new transaction</summary>
         /// <returns>A transaction object</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<CreateTransactionResponse>> TransactionsPostAsync(TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<CreateTransactionResponse>> TransactionsPostAsync(string idempotencyKey, 
+            TransactionRequest body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/transactions");
@@ -4268,7 +4269,9 @@ namespace MyJetWallet.Fireblocks.Client
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
-    
+
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();

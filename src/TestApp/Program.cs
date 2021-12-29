@@ -79,7 +79,7 @@ namespace TestApp
                 break;
             }
 
-            var transaction = await client.TransactionsPostAsync(new TransactionRequest()
+            var transaction = await client.TransactionsPostAsync("1", new TransactionRequest()
             {
                 Amount = amount,
                 AssetId = ethTestAsset.Id,
