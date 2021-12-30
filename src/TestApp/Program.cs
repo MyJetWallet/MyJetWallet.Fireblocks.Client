@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using MyJetWallet.Fireblocks.Client;
+using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.Autofac;
 using MyJetWallet.Fireblocks.Client.DelegateHandlers;
 using System;
@@ -33,6 +34,9 @@ namespace TestApp
             var accountsClient = provider.Resolve<IAccountsClient>();
             var client = provider.Resolve<IClient>();
             var transactionClient = provider.Resolve<ITransactionsClient>();
+            var activator = provider.Resolve<KeyActivator>();
+
+            activator.ActivateKeys(publicKey, privateKey);
 
             var supportedAssets = await client.Supported_assetsAsync();
 
@@ -45,14 +49,14 @@ namespace TestApp
 
             //var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
             var allAccounts = await vaultClient.AccountsGetAsync();
-            var vaultAccountId = "1";
+            var vaultAccountId = "11";
 
-            var walletCreate = await vaultClient.AccountsPostAsync("1", vaultAccountId, ethTestAsset.Id, new Body5()
-            {
-            });
+            //var walletCreate = await vaultClient.AccountsPostAsync("1", vaultAccountId, ethTestAsset.Id, new Body5()
+            //{
+            //});
 
-            var wallet = await vaultClient.AccountsGetAsync(vaultAccountId, ethTestAsset.Id, default);
-            var address = await accountsClient.AddressesGetAsync(vaultAccountId, ethTestAsset.Id, default);
+            //var wallet = await vaultClient.AccountsGetAsync(vaultAccountId, ethTestAsset.Id, default);
+            //var address = await accountsClient.AddressesGetAsync(vaultAccountId, ethTestAsset.Id, default);
 
             //var createAddressRequestИес = await accountsClient.AddressesPostAsync(vaultAccountId, "BTC_TEST", new Body6
             //{
@@ -64,24 +68,24 @@ namespace TestApp
             //});
 
             decimal amount = 0;
-            while (amount == 0)
+            //while (amount == 0)
+            //{
+            //    var acc = await vaultClient.AccountsGetAsync(vaultAccountId, default);
+            //    var available = acc.Result.Assets.FirstOrDefault(x => x.Id == ethTestAsset.Id)?.Available;
+
+            //    if (string.IsNullOrEmpty(available))
+            //    {
+            //        Task.Delay(1000).Wait();
+            //        continue;
+            //    }
+
+            //    amount = decimal.Parse(available);
+            //    break;
+            //}
+            var guid = Guid.NewGuid().ToString();
+            var transaction = await client.TransactionsPostAsync(guid, new TransactionRequest()
             {
-                var acc = await vaultClient.AccountsGetAsync(vaultAccountId, default);
-                var available = acc.Result.Assets.FirstOrDefault(x => x.Id == ethTestAsset.Id)?.Available;
-
-                if (string.IsNullOrEmpty(available))
-                {
-                    Task.Delay(1000).Wait();
-                    continue;
-                }
-
-                amount = decimal.Parse(available);
-                break;
-            }
-
-            var transaction = await client.TransactionsPostAsync("1", new TransactionRequest()
-            {
-                Amount = amount,
+                Amount = 0.001m,
                 AssetId = ethTestAsset.Id,
                 Source = new TransferPeerPath()
                 {
@@ -90,13 +94,15 @@ namespace TestApp
                 },
                 Destination = new DestinationTransferPeerPath()
                 {
-                    Type = TransferPeerPathType.VAULT_ACCOUNT,
-                    Id = "3",
-                    //OneTimeAddress = new OneTimeAddress()
-                    //{
-                    //    Address = "0x1Eab7d412a25a5d00Ec3d04648aa54CeA4aB7e94"
-                    //},
+                    Type = TransferPeerPathType.ONE_TIME_ADDRESS,
+                    //Id = "4",
+                    OneTimeAddress = new OneTimeAddress()
+                    {
+                        Address = "0x1Eab7d412a25a5d00Ec3d04648aa54CeA4aB7e94",
+                        Tag = ""
+                    },
                 },
+                ExternalTxId = guid,
                 FailOnLowFee = false,
                 FeeLevel = TransactionRequestFeeLevel.MEDIUM,
                 Operation = TransactionOperation.TRANSFER,
