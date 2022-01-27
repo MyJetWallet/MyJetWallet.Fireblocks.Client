@@ -5,6 +5,7 @@
 //----------------------
 
 using MyJetWallet.Fireblocks.Client.Extensions;
+using System.Collections.Generic;
 using System.Threading;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -7771,7 +7772,7 @@ namespace MyJetWallet.Fireblocks.Client
                         ProcessResponse(client_, response_);
     
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ == 200)
                         {
                             return new Response(status_, headers_);
                         }
@@ -9501,7 +9502,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class GasStationPropertiesResponse 
     {
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Balance { get; set; }
+        public Dictionary<string, string> Balance { get; set; }
     
         [Newtonsoft.Json.JsonProperty("configuration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public GasStationConfiguration Configuration { get; set; }

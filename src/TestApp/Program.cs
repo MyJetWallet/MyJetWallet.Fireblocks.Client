@@ -34,15 +34,39 @@ namespace TestApp
             var accountsClient = provider.Resolve<IAccountsClient>();
             var client = provider.Resolve<IClient>();
             var transactionClient = provider.Resolve<ITransactionsClient>();
+            var gasStationClient = provider.Resolve<IGas_stationClient>();
             var activator = provider.Resolve<KeyActivator>();
 
             activator.ActivateKeys(publicKey, privateKey);
+
+            var internalWallets = await client.Internal_walletsGetAsync();
+
+            foreach (var wallet in internalWallets.Result)
+            {
+                //Console.WriteLine($"{asset.Id} {asset.Name}");
+                var x = Newtonsoft.Json.JsonConvert.SerializeObject(wallet);
+                Console.WriteLine($"{x}");
+            }
+
+            var gasStation = await client.Gas_stationAsync();
+
+            var z = Newtonsoft.Json.JsonConvert.SerializeObject(gasStation);
+            Console.WriteLine($"{z}");
+
+            var setGas = await gasStationClient.ConfigurationAsync(new()
+            {
+                GasCap = "0.01",
+                GasThreshold = "0.005",
+                MaxGasPrice = "0,000004"
+            });
 
             var supportedAssets = await client.Supported_assetsAsync();
 
             foreach (var asset in supportedAssets.Result)
             {
-                Console.WriteLine($"{asset.Id} {asset.Name}");
+                //Console.WriteLine($"{asset.Id} {asset.Name}");
+                var x = Newtonsoft.Json.JsonConvert.SerializeObject(asset);
+                Console.WriteLine($"{x}");
             }
 
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
