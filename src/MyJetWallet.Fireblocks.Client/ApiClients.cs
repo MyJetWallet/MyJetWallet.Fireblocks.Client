@@ -10063,7 +10063,10 @@ namespace MyJetWallet.Fireblocks.Client
         ZERO_BALANCE_IN_PERMANENT_ADDRESS = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"INCOMPLETE_USER_SETUP")]
-        INCOMPLETE_USER_SETUP = 46
+        INCOMPLETE_USER_SETUP = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"REJECTED_BY_USER")]
+        REJECTED_BY_USER = 47
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
