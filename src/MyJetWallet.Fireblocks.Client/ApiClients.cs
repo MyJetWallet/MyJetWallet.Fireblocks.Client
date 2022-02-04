@@ -10066,7 +10066,10 @@ namespace MyJetWallet.Fireblocks.Client
         INCOMPLETE_USER_SETUP = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"REJECTED_BY_USER")]
-        REJECTED_BY_USER = 47
+        REJECTED_BY_USER = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SIGNING_ERROR")]
+        SIGNING_ERROR = 58,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
