@@ -11230,7 +11230,10 @@ namespace MyJetWallet.Fireblocks.Client
     
         [System.Runtime.Serialization.EnumMember(Value = @"PARTIALLY_COMPLETED")]
         PARTIALLY_COMPLETED = 16,
-    
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SIGNING_ERROR")]
+        SIGNING_ERROR = 17,
+
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
