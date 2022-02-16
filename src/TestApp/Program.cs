@@ -39,26 +39,46 @@ namespace TestApp
 
             activator.ActivateKeys(publicKey, privateKey);
 
-            var internalWallets = await client.Internal_walletsGetAsync();
+            //var internalWallets = await client.Internal_walletsGetAsync();
 
-            foreach (var wallet in internalWallets.Result)
+            //foreach (var wallet in internalWallets.Result)
+            //{
+            //    //Console.WriteLine($"{asset.Id} {asset.Name}");
+            //    var x = Newtonsoft.Json.JsonConvert.SerializeObject(wallet);
+            //    Console.WriteLine($"{x}");
+            //}
+
+            //var gasStation = await client.Gas_stationAsync();
+
+            //var z = Newtonsoft.Json.JsonConvert.SerializeObject(gasStation);
+            //Console.WriteLine($"{z}");
+
+            //1644657961499
+            //1644493762755
+            //var currentUnixTime = DateTimeOffset.UtcNow.AddDays(-40).ToUnixTimeMilliseconds();
+
+            var currentUnixTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+            do
             {
-                //Console.WriteLine($"{asset.Id} {asset.Name}");
-                var x = Newtonsoft.Json.JsonConvert.SerializeObject(wallet);
-                Console.WriteLine($"{x}");
-            }
+                var transactions = await client.TransactionsGetAsync(
+                //after: currentUnixTime.ToString(),
+                before: currentUnixTime.ToString(),
+                orderBy: OrderBy.CreatedAt,
+                status: "COMPLETED",
+                limit: 200);
 
-            var gasStation = await client.Gas_stationAsync();
+                currentUnixTime = transactions.Result.Any() ? transactions.Result.Last().CreatedAt-1 : long.MaxValue;
 
-            var z = Newtonsoft.Json.JsonConvert.SerializeObject(gasStation);
-            Console.WriteLine($"{z}");
+                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(transactions));
+            } while (currentUnixTime != long.MaxValue);
 
-            var setGas = await gasStationClient.ConfigurationAsync(new()
-            {
-                GasCap = "0.01",
-                GasThreshold = "0.005",
-                MaxGasPrice = "0,000004"
-            });
+            //var setGas = await gasStationClient.ConfigurationAsync(new()
+            //{
+            //    GasCap = "0.01",
+            //    GasThreshold = "0.005",
+            //    MaxGasPrice = "0,000004"
+            //});
 
             var supportedAssets = await client.Supported_assetsAsync();
 
