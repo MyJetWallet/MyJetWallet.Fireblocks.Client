@@ -10070,6 +10070,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"SIGNING_ERROR")]
         SIGNING_ERROR = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NONCE_ALLOCATION_FAILED")]
+        NONCE_ALLOCATION_FAILED = 59,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
