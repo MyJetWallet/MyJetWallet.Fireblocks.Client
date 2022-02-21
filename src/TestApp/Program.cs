@@ -57,21 +57,21 @@ namespace TestApp
             //1644493762755
             //var currentUnixTime = DateTimeOffset.UtcNow.AddDays(-40).ToUnixTimeMilliseconds();
 
-            var currentUnixTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            //var currentUnixTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-            do
-            {
-                var transactions = await client.TransactionsGetAsync(
-                //after: currentUnixTime.ToString(),
-                before: currentUnixTime.ToString(),
-                orderBy: OrderBy.CreatedAt,
-                status: "COMPLETED",
-                limit: 200);
+            //do
+            //{
+            //    var transactions = await client.TransactionsGetAsync(
+            //    after: currentUnixTime.ToString(),
+            //    before: currentUnixTime.ToString(),
+            //    orderBy: OrderBy.CreatedAt,
+            //    status: "COMPLETED",
+            //    limit: 200);
 
-                currentUnixTime = transactions.Result.Any() ? transactions.Result.Last().CreatedAt-1 : long.MaxValue;
+            //    currentUnixTime = transactions.Result.Any() ? transactions.Result.Last().CreatedAt - 1 : long.MaxValue;
 
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(transactions));
-            } while (currentUnixTime != long.MaxValue);
+            //    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(transactions));
+            //} while (currentUnixTime != long.MaxValue);
 
             //var setGas = await gasStationClient.ConfigurationAsync(new()
             //{
