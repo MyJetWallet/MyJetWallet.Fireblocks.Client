@@ -11275,6 +11275,8 @@ namespace MyJetWallet.Fireblocks.Client
         [System.Runtime.Serialization.EnumMember(Value = @"SOL_ASSET")]
         SOL_ASSET = 8,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"TRON_TRC20")]
+        TRON_TRC20 = 9,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]

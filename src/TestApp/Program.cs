@@ -15,12 +15,12 @@ namespace TestApp
     {
         static async Task Main(string[] args)
         {
-            //var privateKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_secret.key");
-            var privateKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_secret.key");
+            var privateKey = await File.ReadAllTextAsync(@"C:\Git\fireblocks-uat\fireblocks_secret.key");
+            //var privateKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_secret.key");
             privateKey = privateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
             privateKey = privateKey.Replace("-----END PRIVATE KEY-----", "");
-            var publicKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_api_key");
-            //var publicKey = await File.ReadAllTextAsync(@"C:\Users\O1\Desktop\fireblocks\fireblocks_api_key");
+            //var publicKey = await File.ReadAllTextAsync(@"D:\fireblocks uat\fireblocks_api_key");
+            var publicKey = await File.ReadAllTextAsync(@"C:\Git\fireblocks-uat\fireblocks_api_key");
             var container = new ContainerBuilder();
             var config = new ClientConfigurator()
             {
