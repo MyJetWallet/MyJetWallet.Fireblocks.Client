@@ -11277,6 +11277,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"TRON_TRC20")]
         TRON_TRC20 = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"XDB_ASSET")]
+        XDB_ASSET = 10,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
