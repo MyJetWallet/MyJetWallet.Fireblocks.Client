@@ -184,7 +184,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -265,7 +265,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -342,7 +342,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -419,7 +419,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -501,7 +501,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -587,7 +587,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -672,7 +672,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -753,7 +753,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -829,7 +829,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1119,7 +1119,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1191,7 +1191,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1276,7 +1276,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1361,7 +1361,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1438,7 +1438,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1515,7 +1515,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1597,7 +1597,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1684,7 +1684,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1768,7 +1768,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1850,7 +1850,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -1943,7 +1943,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2183,7 +2183,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2271,7 +2271,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2720,7 +2720,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2795,7 +2795,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2872,7 +2872,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -2943,7 +2943,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3025,7 +3025,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3110,7 +3110,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3186,7 +3186,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3258,7 +3258,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3333,7 +3333,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3410,7 +3410,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3481,7 +3481,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3563,7 +3563,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3648,7 +3648,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3724,7 +3724,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3796,7 +3796,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3873,7 +3873,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -3955,7 +3955,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4027,7 +4027,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4104,7 +4104,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4232,7 +4232,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4310,7 +4310,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4387,7 +4387,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4459,7 +4459,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4531,7 +4531,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4608,7 +4608,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4680,7 +4680,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4755,7 +4755,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4832,7 +4832,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4914,7 +4914,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -4992,7 +4992,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5064,7 +5064,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5136,7 +5136,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5208,7 +5208,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5285,7 +5285,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5504,7 +5504,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5723,7 +5723,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -5939,7 +5939,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6162,7 +6162,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6236,7 +6236,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6502,7 +6502,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6579,7 +6579,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6659,7 +6659,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6739,7 +6739,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -6817,7 +6817,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7047,7 +7047,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7269,7 +7269,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7491,7 +7491,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7570,7 +7570,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7783,7 +7783,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -7997,7 +7997,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -8211,7 +8211,7 @@ namespace MyJetWallet.Fireblocks.Client
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -9523,15 +9523,21 @@ namespace MyJetWallet.Fireblocks.Client
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeePerByte { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal GasPrice { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal GasLimit { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NetworkFee { get; set; }
-    
+
+        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PriorityFee { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("baseFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BaseFee { get; set; }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
         [Newtonsoft.Json.JsonExtensionData]
@@ -9550,12 +9556,18 @@ namespace MyJetWallet.Fireblocks.Client
         [Newtonsoft.Json.JsonProperty("feePerByte", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FeePerByte { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal GasPrice { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NetworkFee1 { get; set; }
-    
+
+        [Newtonsoft.Json.JsonProperty("priorityFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PriorityFee { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("baseFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BaseFee { get; set; }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
         [Newtonsoft.Json.JsonExtensionData]
@@ -9859,7 +9871,10 @@ namespace MyJetWallet.Fireblocks.Client
     
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Code { get; set; }
-    
+
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message { get; set; }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
         [Newtonsoft.Json.JsonExtensionData]

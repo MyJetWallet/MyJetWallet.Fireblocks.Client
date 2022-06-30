@@ -87,6 +87,17 @@ namespace TestApp
                 //Console.WriteLine($"{asset.Id} {asset.Name}");
                 var r = Newtonsoft.Json.JsonConvert.SerializeObject(asset);
                 Console.WriteLine($"{r}");
+                try
+                {
+                    var estimateAsset1 = await client.Estimate_network_feeAsync(asset.Id);
+                    {
+                        var z = Newtonsoft.Json.JsonConvert.SerializeObject(asset.Id);
+                        Console.WriteLine($"{z}");
+                    }
+                }catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
@@ -130,8 +141,10 @@ namespace TestApp
             var guid = Guid.NewGuid().ToString();
             var estimateAsset = await client.Estimate_network_feeAsync(ethTestAsset.Id);
 
-            var z = Newtonsoft.Json.JsonConvert.SerializeObject(estimateAsset);
-            Console.WriteLine($"{z}");
+            {
+                var z = Newtonsoft.Json.JsonConvert.SerializeObject(estimateAsset);
+                Console.WriteLine($"{z}");
+            }
 
             var transactionRequest = new TransactionRequest()
             {
@@ -161,7 +174,7 @@ namespace TestApp
             var response = await transactionClient.Estimate_feeAsync(transactionRequest);
             
             var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
-            Console.WriteLine($"{z}");
+            Console.WriteLine($"{x}");
             
             var transaction = await client.TransactionsPostAsync(guid, transactionRequest);
             //transactionClient.
