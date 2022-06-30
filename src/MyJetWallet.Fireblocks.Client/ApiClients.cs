@@ -9467,8 +9467,6 @@ namespace MyJetWallet.Fireblocks.Client
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
@@ -9526,10 +9524,10 @@ namespace MyJetWallet.Fireblocks.Client
         public string FeePerByte { get; set; }
     
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public decimal GasPrice { get; set; }
     
         [Newtonsoft.Json.JsonProperty("gasLimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasLimit { get; set; }
+        public decimal GasLimit { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NetworkFee { get; set; }
@@ -9553,7 +9551,7 @@ namespace MyJetWallet.Fireblocks.Client
         public string FeePerByte { get; set; }
     
         [Newtonsoft.Json.JsonProperty("gasPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string GasPrice { get; set; }
+        public decimal GasPrice { get; set; }
     
         [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NetworkFee1 { get; set; }

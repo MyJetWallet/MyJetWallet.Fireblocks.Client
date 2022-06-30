@@ -85,8 +85,8 @@ namespace TestApp
             foreach (var asset in supportedAssets.Result)
             {
                 //Console.WriteLine($"{asset.Id} {asset.Name}");
-                var x = Newtonsoft.Json.JsonConvert.SerializeObject(asset);
-                Console.WriteLine($"{x}");
+                var r = Newtonsoft.Json.JsonConvert.SerializeObject(asset);
+                Console.WriteLine($"{r}");
             }
 
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
@@ -126,10 +126,16 @@ namespace TestApp
             //    amount = decimal.Parse(available);
             //    break;
             //}
+            Console.WriteLine();
             var guid = Guid.NewGuid().ToString();
-            var transaction = await client.TransactionsPostAsync(guid, new TransactionRequest()
+            var estimateAsset = await client.Estimate_network_feeAsync(ethTestAsset.Id);
+
+            var z = Newtonsoft.Json.JsonConvert.SerializeObject(estimateAsset);
+            Console.WriteLine($"{z}");
+
+            var transactionRequest = new TransactionRequest()
             {
-                Amount = 0.001m,
+                Amount = 0.01m,
                 AssetId = ethTestAsset.Id,
                 Source = new TransferPeerPath()
                 {
@@ -142,7 +148,7 @@ namespace TestApp
                     //Id = "4",
                     OneTimeAddress = new OneTimeAddress()
                     {
-                        Address = "0x1Eab7d412a25a5d00Ec3d04648aa54CeA4aB7e94",
+                        Address = "0x83ceAC6A4b7060348d8Ebf4996817962Db7e3758",
                         Tag = ""
                     },
                 },
@@ -151,8 +157,13 @@ namespace TestApp
                 FeeLevel = TransactionRequestFeeLevel.MEDIUM,
                 Operation = TransactionOperation.TRANSFER,
                 TreatAsGrossAmount = true,
-
-            });
+            };
+            var response = await transactionClient.Estimate_feeAsync(transactionRequest);
+            
+            var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+            Console.WriteLine($"{z}");
+            
+            var transaction = await client.TransactionsPostAsync(guid, transactionRequest);
             //transactionClient.
 
             //_client = new CircleClient(_accessToken);
