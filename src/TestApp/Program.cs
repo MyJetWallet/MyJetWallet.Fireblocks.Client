@@ -39,6 +39,8 @@ namespace TestApp
 
             activator.ActivateKeys(publicKey, privateKey);
 
+            var x = await accountsClient.AddressesGetAsync("11", "MATIC_POLYGON_MUMBAI", default);
+
             //var internalWallets = await client.Internal_walletsGetAsync();
 
             //foreach (var wallet in internalWallets.Result)
@@ -173,7 +175,7 @@ namespace TestApp
             };
             var response = await transactionClient.Estimate_feeAsync(transactionRequest);
             
-            var x = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+            var x1 = Newtonsoft.Json.JsonConvert.SerializeObject(response);
             Console.WriteLine($"{x}");
             
             var transaction = await client.TransactionsPostAsync(guid, transactionRequest);
