@@ -31,7 +31,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             var now = DateTimeOffset.UtcNow;
             var nonce = now.ToUnixTimeMilliseconds();
-            var issuedTimestamp = now.ToUnixTimeSeconds() + 10;
+            var issuedTimestamp = now.ToUnixTimeSeconds();
             var expirationTimestamp = issuedTimestamp + 20;
             var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;
             var hashBody = GetSignature(body);
