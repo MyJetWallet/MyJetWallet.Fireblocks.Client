@@ -9173,7 +9173,7 @@ namespace MyJetWallet.Fireblocks.Client
     
         /// <summary>The USD value of the requested amount</summary>
         [Newtonsoft.Json.JsonProperty("amountUSD", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public decimal AmountUSD { get; set; }
+        public decimal? AmountUSD { get; set; }
     
         /// <summary>The total fee deducted by the exchange from the actual requested amount (serviceFee = amount - netAmount)</summary>
         [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
