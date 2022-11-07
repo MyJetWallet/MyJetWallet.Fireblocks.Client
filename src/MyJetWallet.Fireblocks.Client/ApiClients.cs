@@ -10089,6 +10089,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"NEED_MORE_TO_CREATE_DESTINATION")]
         NEED_MORE_TO_CREATE_DESTINATION = 60,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"3RD_PARTY_PENDING_SERVICE_MANUAL_APPROVAL")]
+        _3RD_PARTY_PENDING_SERVICE_MANUAL_APPROVAL = 61, 
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
