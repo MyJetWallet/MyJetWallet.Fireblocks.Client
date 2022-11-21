@@ -8433,7 +8433,8 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class ExchangeTradingAccount 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TradingAccountType Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
@@ -10436,7 +10437,10 @@ namespace MyJetWallet.Fireblocks.Client
     
         [System.Runtime.Serialization.EnumMember(Value = @"FUTURES_CROSS")]
         FUTURES_CROSS = 14,
-    
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UNIFIED")]
+        UNIFIED = 15,
+
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
