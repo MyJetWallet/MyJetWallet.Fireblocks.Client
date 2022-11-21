@@ -5851,7 +5851,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="exchangeAccountId">The ID of the exchange account to return</param>
         /// <returns>Transfer succeeded</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> Internal_transferAsync(string exchangeAccountId, Body15 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response> Internal_transferAsync(string exchangeAccountId, string idempotencyKey, Body15 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -5887,7 +5887,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <param name="exchangeAccountId">The ID of the exchange account to return</param>
         /// <returns>Transfer succeeded</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response> Internal_transferAsync(string exchangeAccountId, Body15 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response> Internal_transferAsync(string exchangeAccountId, string idempotencyKey, Body15 body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (exchangeAccountId == null)
                 throw new System.ArgumentNullException("exchangeAccountId");
@@ -5906,7 +5906,8 @@ namespace MyJetWallet.Fireblocks.Client
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-    
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();
