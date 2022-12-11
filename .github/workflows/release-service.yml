@@ -1,0 +1,35 @@
+name: Release Service
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    tags:
+      - 2.*
+
+jobs:
+  uat:
+    uses: MyJetWallet/DevOps/.github/workflows/build.yml@master
+    if: startsWith(github.event.ref, 'refs/tags/2')
+    with:
+      repository_name: ${{ github.event.repository.name }}
+      repository_type: ${{ github.event.repository.private }}
+      release_version: ${GITHUB_REF#refs/tags/}
+    secrets: 
+      ST_DOCKER_USER: ${{ secrets.ST_DOCKER_USER }}
+      ST_DOCKER_PASSWORD: ${{ secrets.ST_DOCKER_PASSWORD }}
+      AZURE_CONTAINER_REGISTRY: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
+      UAT_GIT_TOKEN: ${{ secrets.UAT_GIT_TOKEN }}
+  test:
+    uses: MyJetWallet/DevOps/.github/workflows/build_test.yml@master
+    if: github.ref == 'refs/heads/master'
+    with:
+      repository_name: ${{ github.event.repository.name }}
+      repository_type: ${{ github.event.repository.private }}
+      release_version: 0.0.${{ github.run_number }}
+    secrets: 
+      ST_DOCKER_USER: ${{ secrets.ST_DOCKER_USER }}
+      ST_DOCKER_PASSWORD: ${{ secrets.ST_DOCKER_PASSWORD }}
+      AZURE_CONTAINER_REGISTRY: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
+      UAT_GIT_TOKEN: ${{ secrets.UAT_GIT_TOKEN }}
+      KUBE_CONFIG_DATA__ST_TEST: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
