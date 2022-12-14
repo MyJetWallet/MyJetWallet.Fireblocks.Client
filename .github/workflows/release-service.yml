@@ -5,12 +5,12 @@ on:
     branches:
       - master
     tags:
-      - 2.*
+      - 1.*
 
 jobs:
   uat:
     uses: MyJetWallet/DevOps/.github/workflows/build.yml@master
-    if: startsWith(github.event.ref, 'refs/tags/2')
+    if: startsWith(github.event.ref, 'refs/tags/1')
     with:
       repository_name: ${{ github.event.repository.name }}
       repository_type: ${{ github.event.repository.private }}
