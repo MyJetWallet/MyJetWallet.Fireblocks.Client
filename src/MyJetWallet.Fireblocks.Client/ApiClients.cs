@@ -10100,6 +10100,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"DROPPED_BY_BLOCKCHAIN")]
         DROPPED_BY_BLOCKCHAIN = 63,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"AUTHORIZATION_FAILED")]
+        AUTHORIZATION_FAILED = 64,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
