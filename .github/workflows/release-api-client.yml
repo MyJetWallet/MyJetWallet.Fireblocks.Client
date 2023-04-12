@@ -1,40 +1,13 @@
 name: Release API client nuget
-
 on:
   push:
-    tags: "*"
+    tags: "client-*"
 
 jobs:
-  build:
-
-    runs-on: self-hosted
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 7.0.*
-          source-url: https://nuget.pkg.github.com/myjetwallet/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Build
-        run: dotnet build --configuration Release /p:AssemblyVersion=${GITHUB_REF#refs/tags/}
-
-      - name: Test
-        run: dotnet test --no-build --configuration Release
-
-      - name: Create the package
-        run: dotnet pack --configuration Release src/MyJetWallet.Fireblocks.Client/MyJetWallet.Fireblocks.Client.csproj /p:Version=${GITHUB_REF#refs/tags/}
-
-      - name: Publish the package to GPR
-        run: dotnet nuget push src/MyJetWallet.Fireblocks.Client/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
-
-      - name: Publish the package to GitHub
-        uses: MyJetWallet/nuget-publish-to-github-packages-action@v2.1
-        with:
-          nupkg-path: './src/MyJetWallet.Fireblocks.Client/bin/Release/*.nupkg'
-          repo-owner: 'myjetwallet'
-          gh-user: ${{ github.actor }}
-          token: ${{ secrets.GITHUB_TOKEN }}  
+  client:
+    uses: MyJetWallet/DevOps/.github/workflows/client.yml@master
+    with:
+      repository_name: ${{ github.event.repository.name }}
+      release_version: ${GITHUB_REF#refs/tags/client-}
+    secrets: 
+      NUGET_TOCKEN: ${{ secrets.NUGET_TOCKEN }}
