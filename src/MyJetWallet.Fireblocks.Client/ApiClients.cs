@@ -5334,7 +5334,7 @@ namespace MyJetWallet.Fireblocks.Client
                 }
                 catch (Newtonsoft.Json.JsonException exception)
                 {
-                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
+                    var message = $"Could not deserialize the response body string as {typeof(T).FullName}. Body: '{responseText}').";
                     throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
                 }
             }
