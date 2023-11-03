@@ -10106,6 +10106,9 @@ namespace MyJetWallet.Fireblocks.Client
         
         [System.Runtime.Serialization.EnumMember(Value = @"ACTUAL_FEE_TOO_HIGH")]
         ACTUAL_FEE_TOO_HIGH = 65,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"INVALID_NONCE_TOO_LOW")]
+        INVALID_NONCE_TOO_LOW = 1001,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
