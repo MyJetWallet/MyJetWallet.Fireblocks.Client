@@ -20,7 +20,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
 
             var container = containerBuilder.Build();
             var client = container.Resolve<IClient>();
-            Assert.NotNull(client);
+            ClassicAssert.NotNull(client);
         }
     }
 }

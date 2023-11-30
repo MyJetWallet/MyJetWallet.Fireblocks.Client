@@ -34,9 +34,9 @@ namespace MyJetWallet.Fireblocks.Client.Tests
 
             _provider.AddCredentials(message);
 
-            Assert.Equal("pubKey", message.Headers.GetValues(ApiKeyHeaderGenerator.ApiKeyHeader).Single());
-            Assert.Equal(ApiKeyHeaderGenerator.JwtScheme, message.Headers.Authorization!.Scheme);
-            Assert.NotNull(message.Headers.Authorization!.Parameter);
+            ClassicAssert.Equal("pubKey", message.Headers.GetValues(ApiKeyHeaderGenerator.ApiKeyHeader).Single());
+            ClassicAssert.Equal(ApiKeyHeaderGenerator.JwtScheme, message.Headers.Authorization!.Scheme);
+            ClassicAssert.NotNull(message.Headers.Authorization!.Parameter);
         }
 
         public void Dispose()

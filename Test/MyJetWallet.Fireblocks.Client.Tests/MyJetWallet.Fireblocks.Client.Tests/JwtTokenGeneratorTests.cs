@@ -43,16 +43,16 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         private void ValidatePayload(JwtSecurityToken retrievedToken, string messageBody)
         {
             var payload = retrievedToken.Payload;
-            //Assert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds()), payload.Iat);
-            //Assert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds() + 20), payload.Exp);
-            Assert.Equal(Configuration.ApiKey, payload.Sub);
+            //ClassicAssert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds()), payload.Iat);
+            //ClassicAssert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds() + 20), payload.Exp);
+            ClassicAssert.Equal(Configuration.ApiKey, payload.Sub);
 
-            Assert.True(payload.TryGetValue("nonce", out var retrievedNonce));
-            //Assert.Equal(_nonce.ToUnixTimeMilliseconds(), retrievedNonce);
-            Assert.True(payload.TryGetValue("bodyHash", out var retrievedBodyHash));
+            ClassicAssert.True(payload.TryGetValue("nonce", out var retrievedNonce));
+            //ClassicAssert.Equal(_nonce.ToUnixTimeMilliseconds(), retrievedNonce);
+            ClassicAssert.True(payload.TryGetValue("bodyHash", out var retrievedBodyHash));
             using var sha256 = SHA256.Create();
 
-            Assert.Equal(sha256.ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHex(), retrievedBodyHash);
+            ClassicAssert.Equal(sha256.ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHex(), retrievedBodyHash);
         }
 
         private TokenValidationParameters GetValidationParameters()

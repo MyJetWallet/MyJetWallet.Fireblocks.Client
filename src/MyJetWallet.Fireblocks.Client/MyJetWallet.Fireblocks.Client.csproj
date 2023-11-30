@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>MyJetWallet.Fireblocks.Client is a .Net wrapper for the Fireblocks API. It includes all features that the API provides.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
