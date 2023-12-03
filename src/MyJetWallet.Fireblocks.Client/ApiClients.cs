@@ -27,7 +27,10 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Retrieves all vault accounts for the specified filter.</summary>
         /// <returns>A list of vault accounts</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response<System.Collections.Generic.List<VaultAccount>>> AccountsGetAsync(string namePrefix = null, string nameSuffix = null, string minAmountThreshold = null, string assetId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response<VaultAccountsPagedList>> AccountsGet2Async(
+            string namePrefix = null, string nameSuffix = null, string minAmountThreshold = null, string assetId = null,
+            string before = null, string after = null, int limit = 200,
+            System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new vault account</summary>
@@ -118,7 +121,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<Response<VaultAccountsPagedList>> AccountsGet2Async(
             string namePrefix = null, string nameSuffix = null, string minAmountThreshold = null, string assetId = null, 
-            string before == null, string after=null, int limit = 200,
+            string before = null, string after = null, int limit = 200,
             System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
@@ -187,12 +190,12 @@ namespace MyJetWallet.Fireblocks.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<VaultAccount>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<VaultAccountsPagedList>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            return new Response<System.Collections.Generic.List<VaultAccount>>(status_, headers_, objectResponse_.Object);
+                            return new Response<VaultAccountsPagedList>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {

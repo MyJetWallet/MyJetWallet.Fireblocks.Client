@@ -107,7 +107,7 @@ namespace TestApp
             var ethTestAsset = supportedAssets.Result.First(x => x.Id == "ETH_TEST");
 
             //var vaultCreateResponse = await vaultClient.AccountsPostAsync(new Body { Name = Guid.NewGuid().ToString() });
-            var allAccounts = await vaultClient.AccountsGetAsync();
+            //var allAccounts = await vaultClient.AccountsGetAsync();
             var vaultAccountId = "11";
 
             //var walletCreate = await vaultClient.AccountsPostAsync("1", vaultAccountId, ethTestAsset.Id, new Body5()
