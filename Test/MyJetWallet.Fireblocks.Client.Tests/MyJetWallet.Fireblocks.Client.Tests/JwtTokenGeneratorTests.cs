@@ -45,14 +45,14 @@ namespace MyJetWallet.Fireblocks.Client.Tests
             var payload = retrievedToken.Payload;
             //ClassicAssert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds()), payload.Iat);
             //ClassicAssert.Equal(Convert.ToInt32(_nonce.ToUnixTimeSeconds() + 20), payload.Exp);
-            ClassicAssert.Equal(Configuration.ApiKey, payload.Sub);
+            Assert.Equal(Configuration.ApiKey, payload.Sub);
 
-            ClassicAssert.True(payload.TryGetValue("nonce", out var retrievedNonce));
+            Assert.True(payload.TryGetValue("nonce", out var retrievedNonce));
             //ClassicAssert.Equal(_nonce.ToUnixTimeMilliseconds(), retrievedNonce);
-            ClassicAssert.True(payload.TryGetValue("bodyHash", out var retrievedBodyHash));
+            Assert.True(payload.TryGetValue("bodyHash", out var retrievedBodyHash));
             using var sha256 = SHA256.Create();
 
-            ClassicAssert.Equal(sha256.ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHex(), retrievedBodyHash);
+            Assert.Equal(sha256.ComputeHash(Encoding.UTF8.GetBytes(messageBody)).ToHex(), retrievedBodyHash);
         }
 
         private TokenValidationParameters GetValidationParameters()

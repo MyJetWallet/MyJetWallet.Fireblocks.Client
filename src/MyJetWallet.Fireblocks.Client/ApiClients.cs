@@ -116,7 +116,10 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>Retrieves all vault accounts for the specified filter.</summary>
         /// <returns>A list of vault accounts</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response<System.Collections.Generic.List<VaultAccount>>> AccountsGetAsync(string namePrefix = null, string nameSuffix = null, string minAmountThreshold = null, string assetId = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Response<VaultAccountsPagedList>> AccountsGet2Async(
+            string namePrefix = null, string nameSuffix = null, string minAmountThreshold = null, string assetId = null, 
+            string before == null, string after=null, int limit = 200,
+            System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/vault/accounts?");
@@ -136,6 +139,20 @@ namespace MyJetWallet.Fireblocks.Client
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("assetId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
+            
+            if (before != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("before") + "=").Append(System.Uri.EscapeDataString(ConvertToString(before, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (after != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("after") + "=").Append(System.Uri.EscapeDataString(ConvertToString(after, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (limit != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("limit") + "=").Append(System.Uri.EscapeDataString(ConvertToString(limit, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            
             urlBuilder_.Length--;
     
             var client_ = _httpClient;
@@ -8709,6 +8726,14 @@ namespace MyJetWallet.Fireblocks.Client
     
     
     }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
+    public partial class VaultAccountsPagedList
+    {
+        [Newtonsoft.Json.JsonProperty("Accounts", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<VaultAccount> Accounts { get; set; }
+    }
+    
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
     public partial class VaultAccount 

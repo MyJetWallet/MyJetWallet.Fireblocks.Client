@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using MyJetWallet.Fireblocks.Client;
 using MyJetWallet.Fireblocks.Client.Autofac;
 using Xunit;
 using Xunit.Abstractions;
@@ -20,7 +19,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
 
             var container = containerBuilder.Build();
             var client = container.Resolve<IClient>();
-            ClassicAssert.NotNull(client);
+            Assert.NotNull(client);
         }
     }
 }
