@@ -166,7 +166,11 @@ namespace MyJetWallet.Fireblocks.Client
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("*/*"));
+
+                    var idempotencyKey = System.DateTime.UtcNow.ToString("O");
     
+                    request_.AddFireblocksIdempotencyKeyHeader(idempotencyKey);
+                    
                     PrepareRequest(client_, request_, urlBuilder_);
     
                     var url_ = urlBuilder_.ToString();
