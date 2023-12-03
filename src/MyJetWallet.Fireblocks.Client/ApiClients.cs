@@ -125,7 +125,7 @@ namespace MyJetWallet.Fireblocks.Client
             System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/vault/accounts?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/vault/accounts_paged?");
             if (namePrefix != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("namePrefix") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namePrefix, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
