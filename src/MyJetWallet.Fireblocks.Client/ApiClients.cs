@@ -8744,10 +8744,10 @@ namespace MyJetWallet.Fireblocks.Client
         public PagginationDetails Paging { get; set; }
         
         [Newtonsoft.Json.JsonProperty("previousUrl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PagginationDetails PreviousUrl { get; set; }
+        public string PreviousUrl { get; set; }
         
         [Newtonsoft.Json.JsonProperty("nextUrl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PagginationDetails NextUrl { get; set; }
+        public string NextUrl { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
