@@ -1,9 +1,9 @@
 {
-  "runtime": "Net60",
+  "runtime": "Net80",
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "openApi3.yaml",
+      "url": "openapi3.yaml",
       "output": null,
       "newLineBehavior": "Auto"
     }
