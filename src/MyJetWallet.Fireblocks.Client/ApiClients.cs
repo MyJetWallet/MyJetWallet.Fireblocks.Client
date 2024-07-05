@@ -11332,6 +11332,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"SIGNING_ERROR")]
         SIGNING_ERROR = 17,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"PENDING_ENRICHMENT")]
+        PENDING_ENRICHMENT = 18
 
     }
     
