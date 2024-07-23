@@ -9853,6 +9853,9 @@ namespace MyJetWallet.Fireblocks.Client
     
         [System.Runtime.Serialization.EnumMember(Value = @"BITSO")]
         BITSO = 19,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
+        BYBIT_V2 = 20,
     
     }
     
