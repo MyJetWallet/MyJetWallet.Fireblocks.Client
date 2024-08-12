@@ -10161,6 +10161,9 @@ namespace MyJetWallet.Fireblocks.Client
         [System.Runtime.Serialization.EnumMember(Value = @"ACTUAL_FEE_TOO_HIGH")]
         ACTUAL_FEE_TOO_HIGH = 65,
         
+        [System.Runtime.Serialization.EnumMember(Value = @"CANCELLED_BY_USER_REQUEST")]
+        CANCELLED_BY_USER_REQUEST = 66
+        
         [System.Runtime.Serialization.EnumMember(Value = @"INVALID_NONCE_TOO_LOW")]
         INVALID_NONCE_TOO_LOW = 1001,
     }
