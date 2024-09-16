@@ -9916,6 +9916,9 @@ namespace MyJetWallet.Fireblocks.Client
     
         [System.Runtime.Serialization.EnumMember(Value = @"TYPED_MESSAGE")]
         TYPED_MESSAGE = 8,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"APPROVE")]
+        APPROVE = 9,
     
     }
     
