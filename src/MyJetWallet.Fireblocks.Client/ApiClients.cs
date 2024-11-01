@@ -11391,6 +11391,9 @@ namespace MyJetWallet.Fireblocks.Client
         
         [System.Runtime.Serialization.EnumMember(Value = @"XRP_ASSET")]
         XRP_ASSET = 12,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"TON_ASSET")]
+        TON_ASSET = 13,
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v13.0.0.0)")]
