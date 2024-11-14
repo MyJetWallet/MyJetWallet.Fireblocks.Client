@@ -1288,6 +1288,10 @@ namespace MyJetWallet.Fireblocks.Client
                         {
                             return new Response(status_, headers_);
                         }
+                        else if (status_ == 429)
+                        {
+                            throw new ApiException("429 Too Many Requests.", status_, objectResponse_.Text, headers_, null);
+                        }
                         else
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_, cancellationToken).ConfigureAwait(false);
