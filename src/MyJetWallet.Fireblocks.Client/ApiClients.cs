@@ -989,6 +989,15 @@ namespace MyJetWallet.Fireblocks.Client
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Response> UnhideAsync(string vaultAccountId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        
+        /// <summary>
+        /// Refresh asset balance data
+        /// https://developers.fireblocks.com/reference/updatevaultaccountassetbalance
+        /// </summary>
+        /// <param name="vaultAccountId">The ID of the vault account to return</param>
+        /// <param name="assetId">The ID of the asset</param>
+        /// <returns></returns>
+        System.Threading.Tasks.Task<Response> RefreshAssetBalanceAsync(string vaultAccountId, string assetId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Allocate funds to private ledger</summary>
@@ -1205,6 +1214,77 @@ namespace MyJetWallet.Fireblocks.Client
     
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
+                        {
+                            return new Response(status_, headers_);
+                        }
+                        else
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Error>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<Error>("Error Response", status_, objectResponse_.Object.Message, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<Response> RefreshAssetBalanceAsync(string vaultAccountId, string assetId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (vaultAccountId == null)
+                throw new System.ArgumentNullException("vaultAccountId");
+            
+            if (vaultAccountId == null)
+                throw new System.ArgumentNullException("assetId");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/vault/accounts/{vaultAccountId}/{assetId}/balance");
+            urlBuilder_.Replace("{vaultAccountId}", System.Uri.EscapeDataString(ConvertToString(vaultAccountId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{assetId}", System.Uri.EscapeDataString(ConvertToString(assetId, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
                         {
                             return new Response(status_, headers_);
                         }
