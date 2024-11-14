@@ -1290,7 +1290,7 @@ namespace MyJetWallet.Fireblocks.Client
                         }
                         else if (status_ == 429)
                         {
-                            throw new ApiException("429 Too Many Requests.", status_, objectResponse_.Text, headers_, null);
+                            throw new ApiException("429 Too Many Requests.", status, "429", headers_, null);
                         }
                         else
                         {
