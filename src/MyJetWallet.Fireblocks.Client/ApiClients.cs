@@ -10253,7 +10253,10 @@ namespace MyJetWallet.Fireblocks.Client
         
         [System.Runtime.Serialization.EnumMember(Value = @"REJECTED_BY_BLOCKCHAIN")]
         REJECTED_BY_BLOCKCHAIN = 67,
-        
+
+        [System.Runtime.Serialization.EnumMember(Value = @"MISSING_DEPOSIT_CONFIRMATIONS_FOR_WITHDRAWAL")]
+        MISSING_DEPOSIT_CONFIRMATIONS_FOR_WITHDRAWAL = 68,
+
         [System.Runtime.Serialization.EnumMember(Value = @"INVALID_NONCE_TOO_LOW")]
         INVALID_NONCE_TOO_LOW = 1001,
     }
