@@ -104,8 +104,8 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new Off_exchange_accountsClient(clientConfigurator, httpClient))
-                .As<IOff_exchange_accountsClient>()
+                .RegisterInstance(new Off_exchangeClient(clientConfigurator, httpClient))
+                .As<IOff_exchangeClient>()
                 .AutoActivate()
                 .SingleInstance();
         }

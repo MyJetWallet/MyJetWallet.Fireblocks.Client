@@ -2,8 +2,8 @@
   "runtime": "Net80",
   "defaultVariables": null,
   "documentGenerator": {
-    "fromDocument": {
-      "url": "openapi3.yaml",
+    "fromDocument": {           
+      "url": "api-spec-2.yaml",
       "output": null,
       "newLineBehavior": "Auto"
     }
@@ -13,7 +13,9 @@
       "clientBaseClass": "BaseClient",
       "configurationClass": "ClientConfigurator",
       "generateClientClasses": true,
+      "suppressClientClassesOutput": false,
       "generateClientInterfaces": true,
+      "suppressClientInterfacesOutput": false,
       "clientBaseInterface": null,
       "injectHttpClient": true,
       "disposeHttpClient": true,
@@ -25,12 +27,14 @@
       "httpClientType": "System.Net.Http.HttpClient",
       "useHttpRequestMessageCreationMethod": false,
       "useBaseUrl": true,
-      "generateBaseUrlProperty": false,
+      "generateBaseUrlProperty": true,
       "generateSyncMethods": false,
       "generatePrepareRequestAndProcessResponseAsAsyncMethods": false,
       "exposeJsonSerializerSettings": false,
       "clientClassAccessModifier": "public",
       "typeAccessModifier": "public",
+      "propertySetterAccessModifier": "",
+      "generateNativeRecords": false,
       "generateContractsOutput": false,
       "contractsNamespace": null,
       "contractsOutputFilePath": null,
@@ -90,10 +94,6 @@
       "generateOptionalPropertiesAsNullable": false,
       "generateNullableReferenceTypes": false,
       "templateDirectory": null,
-      "typeNameGeneratorType": null,
-      "propertyNameGeneratorType": null,
-      "enumNameGeneratorType": null,
-      "checksumCacheEnabled": false,
       "serviceHost": null,
       "serviceSchemes": null,
       "output": "ApiClients.cs",

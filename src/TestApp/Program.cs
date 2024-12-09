@@ -142,7 +142,7 @@ namespace TestApp
             //    break;
             //}
             Console.WriteLine();
-            var guid = Guid.NewGuid().ToString();
+            var guid = Guid.NewGuid();
             var estimateAsset = await client.Estimate_network_feeAsync(ethTestAsset.Id);
 
             {
@@ -152,9 +152,9 @@ namespace TestApp
 
             var transactionRequest = new TransactionRequest()
             {
-                Amount = 0.01m,
+                Amount = 0.01m.ToString(),
                 AssetId = ethTestAsset.Id,
-                Source = new TransferPeerPath()
+                Source = new SourceTransferPeerPath()
                 {
                     Id = vaultAccountId,
                     Type = TransferPeerPathType.VAULT_ACCOUNT
@@ -169,18 +169,18 @@ namespace TestApp
                         Tag = ""
                     },
                 },
-                ExternalTxId = guid,
+                ExternalTxId = guid.ToString(),
                 FailOnLowFee = false,
                 FeeLevel = TransactionRequestFeeLevel.MEDIUM,
                 Operation = TransactionOperation.TRANSFER,
                 TreatAsGrossAmount = true,
             };
-            var response = await transactionClient.Estimate_feeAsync(transactionRequest);
+            var response = await transactionClient.Estimate_feeAsync(null, transactionRequest);
             
             var x1 = Newtonsoft.Json.JsonConvert.SerializeObject(response);
             Console.WriteLine($"{x}");
             
-            var transaction = await client.TransactionsPostAsync(guid, transactionRequest);
+            var transaction = await client.TransactionsPostAsync(transactionRequest, guid);
             //transactionClient.
 
             //_client = new CircleClient(_accessToken);
