@@ -52,9 +52,12 @@ Generate Fireblocks API Client flow
         TON_ASSET = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ETH_CONTRACT")]
-        ETH_CONTRACT = 12
+        ETH_CONTRACT = 12,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"XRP_ASSET")]
+        XRP_ASSET = 13
 
-6. Add to enum ExchangeType:
+7. Add to enum ExchangeType:
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
