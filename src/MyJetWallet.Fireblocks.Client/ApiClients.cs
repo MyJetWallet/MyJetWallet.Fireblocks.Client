@@ -34982,6 +34982,8 @@ namespace MyJetWallet.Fireblocks.Client
         [System.Runtime.Serialization.EnumMember(Value = @"SEEDCX")]
         SEEDCX = 25,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
+        BYBIT_V2 = 26,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -50039,6 +50041,14 @@ namespace MyJetWallet.Fireblocks.Client
         [System.Runtime.Serialization.EnumMember(Value = @"XDB_ASSET")]
         XDB_ASSET = 10,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"TON_ASSET")]
+        TON_ASSET = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ETH_CONTRACT")]
+        ETH_CONTRACT = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"XRP_ASSET")]
+        XRP_ASSET = 13
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
