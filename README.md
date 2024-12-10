@@ -6,13 +6,15 @@ Generate Fireblocks API Client flow
    
 2. Genereate ApiClients.cs from console:
 	
-  dotnet new tool-manifest --force	
-	dotnet tool install NSwag.ConsoleCore 
-	dotnet nswag version	
+	dotnet new tool-manifest --force
+
+	dotnet tool install NSwag.ConsoleCore
+
+	dotnet nswag version
 
 	dotnet nswag run nswag.json
  
-3. In ApiClients.cs replace:
+4. In ApiClients.cs replace:
    - status_ == 5XX
      ->     status_ >= 500 && status_ < 600
      
@@ -44,7 +46,7 @@ Generate Fireblocks API Client flow
     - public System.Collections.Generic.List<ExecutionOperations> ExecutionOperations { get; set; } = new System.Collections.Generic.List<ExecutionOperations>();
       ->    public System.Collections.Generic.List<WorkflowExecutionOperation> ExecutionOperations { get; set; } = new System.Collections.Generic.List<WorkflowExecutionOperation>();
 
-4.  Add to enum AssetTypeResponseType:
+5.  Add to enum AssetTypeResponseType:
    
         [System.Runtime.Serialization.EnumMember(Value = @"TON_ASSET")]
         TON_ASSET = 11,
@@ -52,7 +54,7 @@ Generate Fireblocks API Client flow
         [System.Runtime.Serialization.EnumMember(Value = @"ETH_CONTRACT")]
         ETH_CONTRACT = 12
 
-5. Add to enum ExchangeType:
+6. Add to enum ExchangeType:
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
