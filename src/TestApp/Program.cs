@@ -3,7 +3,9 @@ using MyJetWallet.Fireblocks.Client;
 using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.Autofac;
 using MyJetWallet.Fireblocks.Client.DelegateHandlers;
+using MyJetWallet.Fireblocks.Client.Extensions;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -152,7 +154,7 @@ namespace TestApp
 
             var transactionRequest = new TransactionRequest()
             {
-                Amount = 0.01m.ToString(),
+                Amount = 0.01m.TryConvertToString(),
                 AssetId = ethTestAsset.Id,
                 Source = new SourceTransferPeerPath()
                 {

@@ -4759,7 +4759,7 @@ namespace MyJetWallet.Fireblocks.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<ExchangeAccount>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<ExchangeAccount>>(response_, headers_, cancellationToken, "Exchange_accountsGetAsync").ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -9722,7 +9722,7 @@ namespace MyJetWallet.Fireblocks.Client
 
         public bool ReadResponseAsString { get; set; }
 
-        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Threading.CancellationToken cancellationToken)
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Threading.CancellationToken cancellationToken, string printBody = null)
         {
             if (response == null || response.Content == null)
             {
@@ -9732,6 +9732,10 @@ namespace MyJetWallet.Fireblocks.Client
             if (ReadResponseAsString)
             {
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                if (!string.IsNullOrEmpty(printBody))
+                    System.Console.WriteLine($"Received body ({printBody}): {responseText}");
+
                 try
                 {
                     var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
