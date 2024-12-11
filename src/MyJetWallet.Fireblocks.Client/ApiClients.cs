@@ -38299,7 +38299,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>
         /// The ID for AML providers to associate the owner of funds with transactions.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CustomerRefId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("amlScreeningResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
