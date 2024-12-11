@@ -46,7 +46,11 @@ Generate Fireblocks API Client flow
     - public System.Collections.Generic.List<ExecutionOperations> ExecutionOperations { get; set; } = new System.Collections.Generic.List<ExecutionOperations>();
       ->    public System.Collections.Generic.List<WorkflowExecutionOperation> ExecutionOperations { get; set; } = new System.Collections.Generic.List<WorkflowExecutionOperation>();
 
-5.  Add to enum AssetTypeResponseType:
+   In class class TransactionResponse:
+    - [Newtonsoft.Json.JsonProperty("externalTxId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+      ->   [Newtonsoft.Json.JsonProperty("externalTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+6.  Add to enum AssetTypeResponseType:
    
         [System.Runtime.Serialization.EnumMember(Value = @"TON_ASSET")]
         TON_ASSET = 11,
