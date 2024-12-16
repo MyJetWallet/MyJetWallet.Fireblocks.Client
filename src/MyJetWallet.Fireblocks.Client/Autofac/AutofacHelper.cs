@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.DelegateHandlers;
+using MyJetWallet.Fireblocks.Client.Embedded;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,8 +10,8 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
 {
     public static class AutofacHelper
     {
-        public static void RegisterFireblocksClient(this ContainerBuilder builder, 
-            ClientConfigurator clientConfigurator, 
+        public static void RegisterFireblocksClient(this ContainerBuilder builder,
+            ClientConfigurator clientConfigurator,
             params DelegatingHandler[] handlers)
         {
             var keyActivator = new KeyActivator();
@@ -106,6 +107,36 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
             builder
                 .RegisterInstance(new Off_exchangeClient(clientConfigurator, httpClient))
                 .As<IOff_exchangeClient>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new FewWalletsClient(clientConfigurator, httpClient))
+                .As<IFewWalletsClient>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new FewAccountsClient(clientConfigurator, httpClient))
+                .As<IFewAccountsClient>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new FewDevicesClient(clientConfigurator, httpClient))
+                .As<IFewDevicesClient>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new FewRpcClient(clientConfigurator, httpClient))
+                .As<IFewRpcClient>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new FewAssetsClient(clientConfigurator, httpClient))
+                .As<IFewAssetsClient>()
                 .AutoActivate()
                 .SingleInstance();
         }

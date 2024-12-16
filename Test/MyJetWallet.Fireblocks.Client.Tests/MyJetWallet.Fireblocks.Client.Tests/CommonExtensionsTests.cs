@@ -39,7 +39,7 @@ namespace MyJetWallet.Fireblocks.Client.Tests
         [InlineData(123)]
         [InlineData(-123)]
         public void ValidTryConvertToString(decimal value)
-        {            
+        {
             Assert.NotNull(value.TryConvertToString());
             Assert.NotEmpty(value.TryConvertToString());
         }
