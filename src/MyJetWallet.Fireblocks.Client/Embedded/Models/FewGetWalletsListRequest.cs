@@ -2,7 +2,7 @@
 
 namespace MyJetWallet.Fireblocks.Client.Embedded.Models
 {
-    public class FewGetListRequest
+    public class FewGetWalletsListRequest
     {
         [Newtonsoft.Json.JsonProperty("pageCursor")]
         public string PageCursor { get; set; }

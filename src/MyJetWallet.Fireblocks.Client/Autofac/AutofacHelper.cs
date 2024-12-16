@@ -111,32 +111,8 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new FewWalletsClient(clientConfigurator, httpClient))
-                .As<IFewWalletsClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new FewAccountsClient(clientConfigurator, httpClient))
-                .As<IFewAccountsClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new FewDevicesClient(clientConfigurator, httpClient))
-                .As<IFewDevicesClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new FewRpcClient(clientConfigurator, httpClient))
-                .As<IFewRpcClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new FewAssetsClient(clientConfigurator, httpClient))
-                .As<IFewAssetsClient>()
+                .RegisterInstance(new EmbeddedWalletClient(clientConfigurator, httpClient))
+                .As<IEmbeddedWalletClient>()
                 .AutoActivate()
                 .SingleInstance();
         }
