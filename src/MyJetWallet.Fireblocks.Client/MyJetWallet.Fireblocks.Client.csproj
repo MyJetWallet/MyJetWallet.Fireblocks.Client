@@ -1,27 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Description>MyJetWallet.Fireblocks.Client is a .Net wrapper for the Fireblocks API. It includes all features that the API provides.</Description>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/MyJetWallet/MyJetWallet.Fireblocks.Client</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/MyJetWallet/MyJetWallet.Fireblocks.Client</RepositoryUrl>
-        <PackageTags>Fireblocks MyJetWallet.Fireblocks.Client.Net C# .Net CryptoCurrency Wallet Exchange Rest API Wrapper</PackageTags>
-        <NeutralLanguage>en</NeutralLanguage>
-        <Version>1.0.0</Version>
-        <RootNamespace>MyJetWallet.Fireblocks.Client</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>MyJetWallet.Fireblocks.Client is a .Net wrapper for the Fireblocks API. It includes all features that the API provides.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MyJetWallet/MyJetWallet.Fireblocks.Client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MyJetWallet/MyJetWallet.Fireblocks.Client</RepositoryUrl>
+    <PackageTags>Fireblocks MyJetWallet.Fireblocks.Client.Net C# .Net CryptoCurrency Wallet Exchange Rest API Wrapper</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.0.0</Version>
+    <RootNamespace>MyJetWallet.Fireblocks.Client</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Autofac" Version="7.1.0" />
-        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.2.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Webhooks" />
+  </ItemGroup>
 
 </Project>
