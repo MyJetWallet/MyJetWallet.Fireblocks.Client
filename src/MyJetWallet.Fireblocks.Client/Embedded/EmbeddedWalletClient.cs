@@ -1697,7 +1697,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
 
         #region RPC
 
-        public async Task<Response<FewRpcResponse>> RpcInvokeAsync(FewRpcRequest request, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> RpcInvokeAsync(FewRpcRequest request, CancellationToken cancellationToken = default)
         {
             if (request.WalletId == null)
                 throw new ArgumentNullException("walletId");
@@ -1754,12 +1754,9 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<FewRpcResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return new Response<FewRpcResponse>(status_, headers_, objectResponse_.Object);
+                            var responseText = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            return new Response<string>(status_, headers_, responseText);
                         }
                         else
                         {
