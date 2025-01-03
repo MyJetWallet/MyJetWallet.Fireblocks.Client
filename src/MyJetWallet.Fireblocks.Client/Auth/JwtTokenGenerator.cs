@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace MyJetWallet.Fireblocks.Client.Auth
 {
@@ -35,15 +36,21 @@ namespace MyJetWallet.Fireblocks.Client.Auth
             var expirationTimestamp = issuedTimestamp + 20;
             var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;
             var hashBody = GetSignature(body);
-            return new JwtPayload
+            var jwt = new JwtPayload
             {
                 {"uri", msg.RequestUri!.PathAndQuery},
                 {"nonce", nonce},
                 {"iat", issuedTimestamp},
                 {"exp", expirationTimestamp},
-                {"sub", _fireblocksConfiguration.ApiKey},
-                {"bodyHash", hashBody}
+                {"sub", _fireblocksConfiguration.ApiKey}
             };
+            
+            if (!string.IsNullOrEmpty(body))
+            {
+                jwt.Add("bodyHash", GetSignature(body));
+            }
+
+            return jwt;
         }
 
         internal void Activate(object sender, string apiKey, string privateKey)
@@ -69,7 +76,9 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             if (!_keyActivator.IsActivated)
                 throw new Exception("Private key is not activated");
+            
             var payload = GetPayload(msg);
+            
             var token = new JwtSecurityToken(new JwtHeader(_signingCredentials), payload);
 
             var sTokenHandler = new JwtSecurityTokenHandler();

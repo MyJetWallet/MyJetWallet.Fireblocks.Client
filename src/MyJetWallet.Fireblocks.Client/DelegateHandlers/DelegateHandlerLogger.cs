@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MyJetWallet.Fireblocks.Client.DelegateHandlers
@@ -13,16 +14,14 @@ namespace MyJetWallet.Fireblocks.Client.DelegateHandlers
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
-            //System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(request));
-
-            var contentAsStr = request.Content?.ReadAsStringAsync().Result;
-            System.Console.WriteLine(contentAsStr);
+            var uuid = Guid.NewGuid().ToString();
+            var path = request.RequestUri?.ToString();
+            var contentAsStr = request.Content?.ReadAsStringAsync().GetAwaiter().GetResult();
+            Console.WriteLine($"[{uuid}] Request path: {path}, content: {contentAsStr}");
             var response = await base.SendAsync(request, cancellationToken);
 
-            //System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(request));
-
-            contentAsStr = await response.Content.ReadAsStringAsync();
-            System.Console.WriteLine(contentAsStr);
+            contentAsStr = response.Content?.ReadAsStringAsync().GetAwaiter().GetResult();
+            Console.WriteLine($"[{uuid}] Response path: {path}, Code: {response.StatusCode}, content: {contentAsStr}");
 
             return response;
         }

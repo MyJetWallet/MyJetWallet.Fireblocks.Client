@@ -28,7 +28,9 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             if (!_keyActivator.IsActivated)
                 throw new Exception("Api key is not activated!");
+            
             var token = _jwtTokenGenerator.GenerateJwtToken(msg);
+            
             msg.Headers.Authorization = new AuthenticationHeaderValue(JwtScheme, token);
             msg.Headers.Add(ApiKeyHeader, _configuration.ApiKey);
         }

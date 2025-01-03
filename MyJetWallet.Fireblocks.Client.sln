@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyJetWallet.Fireblocks.Clie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJetWallet.Fireblocks.Client.Tests", "Test\MyJetWallet.Fireblocks.Client.Tests\MyJetWallet.Fireblocks.Client.Tests\MyJetWallet.Fireblocks.Client.Tests.csproj", "{E2727EE7-521B-428F-8706-3A53755E1FEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp2", "Test\MyJetWallet.Fireblocks.Client.Tests\TestApp2\TestApp2.csproj", "{3D2B3B73-C0C5-4E55-98DC-15C25000297F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{E2727EE7-521B-428F-8706-3A53755E1FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2727EE7-521B-428F-8706-3A53755E1FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2727EE7-521B-428F-8706-3A53755E1FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D2B3B73-C0C5-4E55-98DC-15C25000297F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D2B3B73-C0C5-4E55-98DC-15C25000297F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D2B3B73-C0C5-4E55-98DC-15C25000297F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D2B3B73-C0C5-4E55-98DC-15C25000297F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
