@@ -30,6 +30,10 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
             if (string.IsNullOrEmpty(clientConfigurator.ApiPrivateKey) &&
                 string.IsNullOrEmpty(clientConfigurator.ApiKey))
                 keyActivator.IsActivated = false;
+            else
+            {
+                keyActivator.ActivateKeys(clientConfigurator.ApiKey, clientConfigurator.ApiPrivateKey);
+            }
 
             if (handlers != null && handlers.Any())
             {
