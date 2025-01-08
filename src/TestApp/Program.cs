@@ -41,6 +41,8 @@ namespace TestApp
             var config = new ClientConfigurator()
             {
                 BaseUrl = "https://sandbox-api.fireblocks.io/v1",
+                ApiKey = apiKey,
+                ApiPrivateKey = privateKey
             };
             container.RegisterFireblocksClient(config, new DelegateHandlerLogger());
             var provider = container.Build();
@@ -54,10 +56,8 @@ namespace TestApp
             var embeddedClient = provider.Resolve<IEmbeddedWalletClient>();
 
 
-            var activator = provider.Resolve<KeyActivator>();
-
-
-            activator.ActivateKeys(apiKey, privateKey);
+            //var activator = provider.Resolve<KeyActivator>();
+            //activator.ActivateKeys(apiKey, privateKey);
 
             // var accounts = await vaultClient.Accounts_pagedAsync();
             // Console.WriteLine($"Code: {accounts.StatusCode}; Count: {accounts.Result?.Accounts.Count}");
