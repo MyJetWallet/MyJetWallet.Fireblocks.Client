@@ -81,16 +81,16 @@ namespace TestApp
                      PageSize = 100
                  }, CancellationToken.None);
 
-            var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
-                new FewAssetGetSupportedAssetsListRequest()
-                {
-                    OnlyBaseAssets = true,
-                    PageCursor = "",
-                    PageSize = 100
-                }, CancellationToken.None);
+            //var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+            //    new FewAssetGetSupportedAssetsListRequest()
+            //    {
+            //        OnlyBaseAssets = true,
+            //        PageCursor = "",
+            //        PageSize = 100
+            //    }, CancellationToken.None);
 
             Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
-            Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
+            //Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
 
             Console.ReadLine();
         }
