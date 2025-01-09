@@ -53,7 +53,8 @@ namespace TestApp
             var transactionClient = provider.Resolve<ITransactionsClient>();
             var gasStationClient = provider.Resolve<IGas_stationClient>();
 
-            var embeddedClient = provider.Resolve<IEmbeddedWalletClient>();
+            var embeddedAdminClient = provider.Resolve<IEmbeddedWalletAdminClient>();
+            var embeddedSignerClient = provider.Resolve<IEmbeddedWalletSignerClient>();
 
 
             //var activator = provider.Resolve<KeyActivator>();
@@ -65,7 +66,7 @@ namespace TestApp
             Console.WriteLine();
             Console.WriteLine();
 
-             var assetList = await embeddedClient.AssetsGetSupportedAssetsListAsync(
+             var assetListAdmin = await embeddedAdminClient.AssetsGetSupportedAssetsListAsync(
                  new FewAssetGetSupportedAssetsListRequest()
                  {
                      OnlyBaseAssets = true,
@@ -73,7 +74,16 @@ namespace TestApp
                      PageSize = 100
                  }, CancellationToken.None);
 
-            Console.WriteLine($"Code: {assetList.StatusCode}; Count: {assetList.Result?.Data?.Count}; Padding: {assetList.Result?.Paging?.Next}");
+            var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                new FewAssetGetSupportedAssetsListRequest()
+                {
+                    OnlyBaseAssets = true,
+                    PageCursor = "",
+                    PageSize = 100
+                }, CancellationToken.None);
+
+            Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
+            Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
 
             Console.ReadLine();
         }
