@@ -5,6 +5,7 @@
 //----------------------
 
 using Microsoft.AspNetCore.Mvc;
+using MyJetWallet.Fireblocks.Client.Embedded;
 using System.Threading;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
@@ -13865,7 +13866,7 @@ namespace MyJetWallet.Fireblocks.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class TransactionsClient : BaseClient, ITransactionsClient
+    public partial class TransactionsClient : BaseClient, ITransactionsClient, ITransactionsAdminClient, ITransactionsSignerClient
     {
         #pragma warning disable 8618
         private string _baseUrl;

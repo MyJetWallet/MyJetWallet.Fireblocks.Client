@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace MyJetWallet.Fireblocks.Client.Embedded
 {
-    public partial class EmbeddedWalletClient : BaseClient, IEmbeddedWalletClient
+    public partial class EmbeddedWalletClient : BaseClient, IEmbeddedWalletAdminClient, IEmbeddedWalletSignerClient
     {
         private string _baseUrl;
 
