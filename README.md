@@ -53,6 +53,10 @@ Generate Fireblocks API Client flow
     - [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
       ->   [Newtonsoft.Json.JsonProperty("customerRefId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
 
+   In class class TransactionsClient:
+    - public partial class TransactionsClient : BaseClient, ITransactionsClient
+      ->   public partial class TransactionsClient : BaseClient, ITransactionsClient, ITransactionsAdminClient, ITransactionsSignerClient
+      
 6.  Add to enum AssetTypeResponseType:
    
         [System.Runtime.Serialization.EnumMember(Value = @"TON_ASSET")]
