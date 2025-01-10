@@ -2,7 +2,7 @@
 
 namespace MyJetWallet.Fireblocks.Client.Embedded.Models
 {
-    public class FewWalletsDeviceSetupStatus
+    public class FewWalletsAlgorithmSetupStatus
     {
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Status { get; set; }

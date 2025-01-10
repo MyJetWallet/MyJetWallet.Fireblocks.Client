@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MyJetWallet.Fireblocks.Client.Embedded;
 using MyJetWallet.Fireblocks.Client.Embedded.Models;
+using Newtonsoft.Json;
 
 namespace TestApp
 {
@@ -82,24 +83,33 @@ namespace TestApp
             Console.WriteLine();
             Console.WriteLine();
 
-             var assetListAdmin = await embeddedAdminClient.AssetsGetSupportedAssetsListAsync(
-                 new FewAssetGetSupportedAssetsListRequest()
-                 {
-                     OnlyBaseAssets = true,
-                     PageCursor = "",
-                     PageSize = 100
-                 }, CancellationToken.None);
+            var resp = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
+            {
+                WalletId = "cfb579d4-16e5-4724-8613-e8c8147bd2ec"
+            }, default);
 
-            var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
-                new FewAssetGetSupportedAssetsListRequest()
-                {
-                    OnlyBaseAssets = true,
-                    PageCursor = "",
-                    PageSize = 100
-                }, CancellationToken.None);
+            var data = resp.Result;
+            
+            Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
 
-            Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
-            Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
+            //  var assetListAdmin = await embeddedAdminClient.AssetsGetSupportedAssetsListAsync(
+            //      new FewAssetGetSupportedAssetsListRequest()
+            //      {
+            //          OnlyBaseAssets = true,
+            //          PageCursor = "",
+            //          PageSize = 100
+            //      }, CancellationToken.None);
+            //
+            // var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+            //     new FewAssetGetSupportedAssetsListRequest()
+            //     {
+            //         OnlyBaseAssets = true,
+            //         PageCursor = "",
+            //         PageSize = 100
+            //     }, CancellationToken.None);
+            //
+            // Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
+            // Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
 
             Console.ReadLine();
         }
