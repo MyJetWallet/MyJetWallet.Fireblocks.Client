@@ -40,7 +40,11 @@ namespace TestApp
             signerPrivateKey = signerPrivateKey.Replace("-----END PRIVATE KEY-----", "");
             signerPrivateKey = signerPrivateKey.Replace("\r\n", "");
 
-
+            //await Console.Out.WriteLineAsync("Admin key:");
+            //await Console.Out.WriteLineAsync(admimPrivateKey);
+            //await Console.Out.WriteLineAsync();
+            //await Console.Out.WriteLineAsync("Signer key:");
+            //await Console.Out.WriteLineAsync(signerPrivateKey);
 
             var container = new ContainerBuilder();
             var adminConfig = new ClientConfigurator()
