@@ -25,32 +25,37 @@ namespace TestApp
             //var body = "";
             //var transaction = (Newtonsoft.Json.JsonConvert.DeserializeObject<WebhookWithData<TransactionResponse>>(body)).Data;
 
-            var privateKey = await File.ReadAllTextAsync("api_test_secret.key");
-            var apiKey = "b4fcd05f-0ebc-44ac-9e60-808c7d3d012e";
+            var admimPrivateKey = await File.ReadAllTextAsync("test_API_EW_Admin_secret.key");
+            var adminApiKey = "b4fcd05f-0ebc-44ac-9e60-808c7d3d012e";
 
-            var privateKey1 = await File.ReadAllTextAsync("API_Editor_secret.key");
-            var apiKey1 = "d5a40f93-8cbf-49e3-aa2e-0a3d8e81b4e4";
+            var signerPrivateKey = await File.ReadAllTextAsync("test_API_EW_Signer_secret.key");
+            var signerApiKey = "ea2bed5d-ca4c-4ff1-981b-89d422bf8fb0";
+            
 
-            privateKey = privateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
-            privateKey = privateKey.Replace("-----END PRIVATE KEY-----", "");
-            privateKey = privateKey.Replace("\r\n", "");
+            admimPrivateKey = admimPrivateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
+            admimPrivateKey = admimPrivateKey.Replace("-----END PRIVATE KEY-----", "");
+            admimPrivateKey = admimPrivateKey.Replace("\r\n", "");
+            
+            signerPrivateKey = signerPrivateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
+            signerPrivateKey = signerPrivateKey.Replace("-----END PRIVATE KEY-----", "");
+            signerPrivateKey = signerPrivateKey.Replace("\r\n", "");
 
 
 
             var container = new ContainerBuilder();
-            var config = new ClientConfigurator()
+            var adminConfig = new ClientConfigurator()
             {
                 BaseUrl = "https://sandbox-api.fireblocks.io/v1",
-                ApiKey = apiKey,
-                ApiPrivateKey = privateKey
+                ApiKey = adminApiKey,
+                ApiPrivateKey = admimPrivateKey
             };
-            var config1 = new ClientConfigurator()
+            var signerConfig = new ClientConfigurator()
             {
                 BaseUrl = "https://sandbox-api.fireblocks.io/v1",
-                ApiKey = apiKey1,
-                ApiPrivateKey = privateKey1
+                ApiKey = signerApiKey,
+                ApiPrivateKey = signerPrivateKey
             };
-            container.RegisterEmbeddedFireblocksClient(config, config1);//, new DelegateHandlerLogger());
+            container.RegisterEmbeddedFireblocksClient(adminConfig, signerConfig);//, new DelegateHandlerLogger());
             var provider = container.Build();
 
             var vaultClient = provider.Resolve<IVaultClient>();
@@ -81,16 +86,16 @@ namespace TestApp
                      PageSize = 100
                  }, CancellationToken.None);
 
-            //var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
-            //    new FewAssetGetSupportedAssetsListRequest()
-            //    {
-            //        OnlyBaseAssets = true,
-            //        PageCursor = "",
-            //        PageSize = 100
-            //    }, CancellationToken.None);
+            var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                new FewAssetGetSupportedAssetsListRequest()
+                {
+                    OnlyBaseAssets = true,
+                    PageCursor = "",
+                    PageSize = 100
+                }, CancellationToken.None);
 
             Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
-            //Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
+            Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
 
             Console.ReadLine();
         }

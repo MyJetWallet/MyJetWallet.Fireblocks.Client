@@ -10,10 +10,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="api_test_secret.key">
+      <None Update="test_API_EW_Admin_secret.key">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="API_Editor_secret.key">
+      <None Update="test_API_EW_Signer_secret.key">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
