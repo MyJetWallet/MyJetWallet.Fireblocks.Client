@@ -60,7 +60,8 @@ namespace TestApp
                 ApiKey = signerApiKey,
                 ApiPrivateKey = signerPrivateKey
             };
-            container.RegisterEmbeddedFireblocksClient(adminConfig, signerConfig);//, new DelegateHandlerLogger());
+
+            container.RegisterEmbeddedFireblocksClient(adminConfig, signerConfig); //, new DelegateHandlerLogger());
             var provider = container.Build();
 
             var vaultClient = provider.Resolve<IVaultClient>();
@@ -83,14 +84,63 @@ namespace TestApp
             Console.WriteLine();
             Console.WriteLine();
 
-            var resp = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
+            Console.WriteLine("WalletsGetByIdAsync:");
+            var wallet = await embeddedAdminClient.WalletsGetByIdAsync(new FewWalletsGetByIdRequest()
             {
-                WalletId = "cfb579d4-16e5-4724-8613-e8c8147bd2ec"
+                WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd"
             }, default);
-
-            var data = resp.Result;
             
-            Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            Console.WriteLine(JsonConvert.SerializeObject(wallet.Result, Formatting.Indented));
+
+            Console.WriteLine("WalletsGetWalletKeySetupStateAsync:");
+            var walletSetupKeyState = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
+            {
+                WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd"
+            }, default);
+            
+            Console.WriteLine(JsonConvert.SerializeObject(walletSetupKeyState.Result, Formatting.Indented));
+
+            // Console.WriteLine("CreateAccountAsync:");
+            // var acountCreateResp = await embeddedAdminClient.CreateAccountAsync(new FewGetByWalletIdRequest()
+            // {
+            //     WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd"
+            // }, default);
+            //
+            // Console.WriteLine(JsonConvert.SerializeObject(acountCreateResp, Formatting.Indented));
+            
+            
+            Console.WriteLine("GetAccountsListAsync:");
+            var accountList = await embeddedAdminClient.GetAccountByIdAsync(new FewAccountRequest()
+            {
+                WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd",
+                AccountId = "1"
+            }, default);
+            
+            Console.WriteLine(JsonConvert.SerializeObject(accountList.Result, Formatting.Indented));
+
+
+            var payload1 = @"{""method"":""get_service_certificates"",""params"":[{""names"":[""policy_service"",""signing_service"",""zona_service"",""nckms"",""ncw-service""]}],""headers"":{""physicalDeviceId"":""f88b3a5b-631a-4e42-9b68-39bef0fce0f8"",""mpcVersion"":""6"",""platformType"":""iOS"",""sdkVersion"":""2.9.1""}}";
+            
+            Console.WriteLine($"RPC 1\n{payload1}");
+
+            var recCall1 = await embeddedSignerClient.RpcInvokeAsync(
+                walletId: "da24b489-dc68-460b-b0e8-0fcbfe5624fd",
+                deviceId: "b75d679b-6583-4f8f-8048-d0da40f92738",
+                request: new FewRpcRequest()
+                {
+                    Payload = payload1
+                }); 
+            
+            Console.WriteLine(JsonConvert.SerializeObject(recCall1, Formatting.Indented));
+
+            // var resp = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
+            // {
+            //     WalletId = "cfb579d4-16e5-4724-8613-e8c8147bd2ec"
+            // }, default);
+            //
+            // var data = resp.Result;
+            //
+            // Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
 
             //  var assetListAdmin = await embeddedAdminClient.AssetsGetSupportedAssetsListAsync(
             //      new FewAssetGetSupportedAssetsListRequest()

@@ -63,7 +63,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
 
         #region RPC
 
-        Task<Response<string>> RpcInvokeAsync(FewRpcRequest request, CancellationToken cancellationToken);
+        Task<Response<string>> RpcInvokeAsync(string walletId, string deviceId, FewRpcRequest request, CancellationToken cancellationToken = default);
 
         #endregion
     }

@@ -1697,15 +1697,15 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
 
         #region RPC
 
-        public async Task<Response<string>> RpcInvokeAsync(FewRpcRequest request, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> RpcInvokeAsync(string walletId, string deviceId, FewRpcRequest request, CancellationToken cancellationToken = default)
         {
-            if (request.WalletId == null)
+            if (walletId == null)
                 throw new ArgumentNullException("walletId");
 
-            if (request.DeviceId == null)
+            if (deviceId == null)
                 throw new ArgumentNullException("deviceId");
 
-            if (request.Payload == null)
+            if (request?.Payload == null)
                 throw new ArgumentNullException("payload");
 
             var client_ = _httpClient;
@@ -1714,7 +1714,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
             {
                 using (var request_ = new HttpRequestMessage())
                 {
-                    var json_ = JsonConvert.SerializeObject(request.Payload, JsonSerializerSettings);
+                    var json_ = JsonConvert.SerializeObject(request, JsonSerializerSettings);
                     var content_ = new StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -1724,17 +1724,23 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "ncwncw/wallets/{walletId}/devices/{deviceId}/invoke"
-                    urlBuilder_.Append("ncw/wallets");
-                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.WalletId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("ncw/wallets/");
+                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(walletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/devices/");
-                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.DeviceId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(deviceId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/invoke");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
                     var url_ = urlBuilder_.ToString();
+                    
+                    //Console.WriteLine($"RPC CALL: {url_}");
+                    
                     request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
+                    
+                    //Console.WriteLine($"RPC CALL: {request_.RequestUri.ToString()}");
+                    
 
                     var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;
