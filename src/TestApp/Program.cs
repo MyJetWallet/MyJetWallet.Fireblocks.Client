@@ -131,7 +131,7 @@ namespace TestApp
                     Payload = payload1
                 }); 
             
-            Console.WriteLine(JsonConvert.SerializeObject(recCall1, Formatting.Indented));
+            Console.WriteLine(JsonConvert.SerializeObject(recCall1.Result, Formatting.Indented));
 
             // var resp = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
             // {
