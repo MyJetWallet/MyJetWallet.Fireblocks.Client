@@ -27,13 +27,13 @@ namespace MyJetWallet.Fireblocks.Client.Embedded.Models
         public string Tag { get; set; }
 
         [Newtonsoft.Json.JsonProperty("addressIndex")]
-        public int AddressIndex { get; set; }
+        public decimal AddressIndex { get; set; }
 
         [Newtonsoft.Json.JsonProperty("change")]
         public decimal Change { get; set; }
 
         [Newtonsoft.Json.JsonProperty("coinType")]
-        public int CoinType { get; set; }
+        public decimal CoinType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("customerRefId")]
         public string CustomerRefId { get; set; }

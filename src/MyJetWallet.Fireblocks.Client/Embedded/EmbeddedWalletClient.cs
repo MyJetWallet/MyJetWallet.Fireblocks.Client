@@ -1299,7 +1299,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "ncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}"
-                    urlBuilder_.Append("ncw/wallets");
+                    urlBuilder_.Append("ncw/wallets/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.WalletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/accounts/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.AccountId, System.Globalization.CultureInfo.InvariantCulture)));
