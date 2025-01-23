@@ -51,7 +51,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url);
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(HttpClient client, HttpResponseMessage response);
-       
+
         #region Wallets
 
         public async Task<Response<bool>> WalletsChangeIsEnableAsync(FewWalletsCnahgeEnabledRequest request, CancellationToken cancellationToken = default)
@@ -311,8 +311,10 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     {
                         urlBuilder_.Append(Uri.EscapeDataString("pageCursor")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.PageCursor, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
-
-                    urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (request.Enabled.HasValue)
+                    {
+                        urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
                     urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -708,7 +710,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "ncw/wallets/{walletId}/accounts"
-                    urlBuilder_.Append("ncw/wallets");
+                    urlBuilder_.Append("ncw/wallets/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.WalletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/accounts");
                     urlBuilder_.Append('?');
@@ -729,8 +731,10 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     {
                         urlBuilder_.Append(Uri.EscapeDataString("pageCursor")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.PageCursor, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
-
-                    urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (request.Enabled.HasValue)
+                    {
+                        urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
                     urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -813,7 +817,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
                     // Operation Path: "ncw/wallets/{walletId}/accounts/{accountId}/assets"
-                    urlBuilder_.Append("ncw/wallets");
+                    urlBuilder_.Append("ncw/wallets/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.WalletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/accounts/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.AccountId, System.Globalization.CultureInfo.InvariantCulture)));
@@ -836,8 +840,11 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     {
                         urlBuilder_.Append(Uri.EscapeDataString("pageCursor")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.PageCursor, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
+                    if (request.Enabled.HasValue)
+                    {
+                        urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
 
-                    urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -1097,8 +1104,8 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "ncwncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}/addresses"
-                    urlBuilder_.Append("ncw/wallets");
+                    // Operation Path: "ncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}/addresses"
+                    urlBuilder_.Append("ncw/wallets/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.WalletId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/accounts/");
                     urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.AccountId, System.Globalization.CultureInfo.InvariantCulture)));
@@ -1123,8 +1130,10 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     {
                         urlBuilder_.Append(Uri.EscapeDataString("pageCursor")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.PageCursor, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
-
-                    urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    if (request.Enabled.HasValue)
+                    {
+                        urlBuilder_.Append(Uri.EscapeDataString("enabled")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Enabled, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
                     urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -1733,14 +1742,14 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     PrepareRequest(client_, request_, urlBuilder_);
 
                     var url_ = urlBuilder_.ToString();
-                    
+
                     //Console.WriteLine($"RPC CALL: {url_}");
-                    
+
                     request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-                    
+
                     //Console.WriteLine($"RPC CALL: {request_.RequestUri.ToString()}");
-                    
+
 
                     var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     var disposeResponse_ = true;

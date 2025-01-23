@@ -17,6 +17,6 @@ namespace MyJetWallet.Fireblocks.Client.Embedded.Models
         public string Order { get; set; } //Defaults to ASC
 
         [Newtonsoft.Json.JsonProperty("enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
     }
 }
