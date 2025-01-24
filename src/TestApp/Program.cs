@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using MyJetWallet.Fireblocks.Client.Embedded;
 using MyJetWallet.Fireblocks.Client.Embedded.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TestApp
 {
@@ -25,6 +26,8 @@ namespace TestApp
         {
             //var body = "";
             //var transaction = (Newtonsoft.Json.JsonConvert.DeserializeObject<WebhookWithData<TransactionResponse>>(body)).Data;
+
+            Console.WriteLine(Math.Round(Convert.ToDecimal("22222222222222.33333333333333333333333333333333"), 18, MidpointRounding.ToNegativeInfinity)); 
 
             var admimPrivateKey = await File.ReadAllTextAsync("test_API_EW_Admin_secret.key");
             var adminApiKey = "b4fcd05f-0ebc-44ac-9e60-808c7d3d012e";
@@ -160,6 +163,123 @@ namespace TestApp
             //
             // Console.WriteLine($"AssetListAdmin Code: {assetListAdmin.StatusCode}; Count: {assetListAdmin.Result?.Data?.Count}; Padding: {assetListAdmin.Result?.Paging?.Next}");
             // Console.WriteLine($"AssetListSigner Code: {assetListSigner.StatusCode}; Count: {assetListSigner.Result?.Data?.Count}; Padding: {assetListSigner.Result?.Paging?.Next}");
+
+
+            try
+            {
+
+                //var assetAdminAdd = await embeddedAdminClient.AssetsAddAssetAsync(
+                //    new FewAssetRequest()
+                //    {
+                //        AccountId = "5",
+                //        AssetId = "BTC_TEST",
+                //        WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                //    }, CancellationToken.None);
+
+                wallet = await embeddedAdminClient.WalletsGetByIdAsync(new FewWalletsGetByIdRequest()
+                {
+                    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                }, default);
+
+                var acc = await embeddedSignerClient.GetAccountByIdAsync(new FewAccountRequest
+                {
+                    AccountId = "5",
+                    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                }, default);
+
+                var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                    new FewAssetGetSupportedAssetsListRequest()
+                    {
+                        OnlyBaseAssets = true,
+                        PageCursor = "",
+                        PageSize = 10
+                    }, CancellationToken.None);
+                
+                var assetListSignerNext = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                    new FewAssetGetSupportedAssetsListRequest()
+                    {
+                        OnlyBaseAssets = true,
+                        PageCursor = assetListSigner.Result.Paging.Next, //"ETH:7"
+                        PageSize = 100
+                    }, CancellationToken.None);
+                //assetListSignerNext.Result.Paging.Next == null
+
+                var RR = await embeddedAdminClient.AssetsGetAssetsListAsync(new FewAssetsGetListRequest
+                {
+                        AccountId = "0",
+                        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
+                        Order = "ASC",
+                        PageCursor = "",
+                        PageSize = 50,
+                }, default);
+
+
+                var assetListAdmin = await embeddedAdminClient.AssetsGetAssetAddressesListAsync(
+                    new FewAssetAddressesGetListRequest()
+                    {
+                        AccountId = "0",
+                        AssetId = "CELO_BAK",
+                        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
+                        PageCursor = "",
+                        PageSize = 50,
+                        Order = "ASC"
+                    }, CancellationToken.None);
+
+                //var add = await embeddedSignerClient.AssetsAddAssetAsync(new FewAssetRequest
+                //{
+                //    AssetId = "USDC",
+                //    AccountId = "5",
+                //    WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                //}, default);
+
+                //var tmp = await embeddedAdminClient.AssetsGetAssetAddressesListAsync(new FewAssetAddressesGetListRequest
+                //{
+                //    AssetId = "BTC_TEST",
+                //    AccountId = "5",
+                //    PageSize  = 50,
+                //    PageCursor = "",
+                //    WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                //}, default);
+
+                var list = new List<FewAsset>();
+                foreach (var item in assetListSigner.Result.Data)
+                {
+                    try
+                    {
+                        var _asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
+                        {
+                            AccountId = "5",
+                            AssetId = item.Id,
+                            WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                        }, default);
+
+                        list.Add(_asset.Result);
+                    }
+                    catch (Exception)
+                    {
+                    }                    
+                }
+
+                var asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
+                {
+                    AccountId = "5",
+                    AssetId = "BTC_TEST",
+                    WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                }, default);
+
+
+                var assettSignerAdd = await embeddedSignerClient.AssetsAddAssetAsync(
+                    new FewAssetRequest()
+                    {
+                        AccountId = "5",
+                        AssetId = assetListSigner.Result.Data.First().Id,
+                        WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                    }, default);
+            }
+            catch (Exception ex)
+            {
+                var tmp = ex;
+            }
 
             Console.ReadLine();
         }
