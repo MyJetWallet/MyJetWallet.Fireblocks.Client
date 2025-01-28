@@ -27,19 +27,19 @@ namespace TestApp
             //var body = "";
             //var transaction = (Newtonsoft.Json.JsonConvert.DeserializeObject<WebhookWithData<TransactionResponse>>(body)).Data;
 
-            Console.WriteLine(Math.Round(Convert.ToDecimal("22222222222222.33333333333333333333333333333333"), 18, MidpointRounding.ToNegativeInfinity)); 
+            Console.WriteLine(Math.Round(Convert.ToDecimal("22222222222222.33333333333333333333333333333333"), 18, MidpointRounding.ToNegativeInfinity));
 
             var admimPrivateKey = await File.ReadAllTextAsync("test_API_EW_Admin_secret.key");
             var adminApiKey = "b4fcd05f-0ebc-44ac-9e60-808c7d3d012e";
 
             var signerPrivateKey = await File.ReadAllTextAsync("test_API_EW_Signer_secret.key");
             var signerApiKey = "ea2bed5d-ca4c-4ff1-981b-89d422bf8fb0";
-            
+
 
             admimPrivateKey = admimPrivateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
             admimPrivateKey = admimPrivateKey.Replace("-----END PRIVATE KEY-----", "");
             admimPrivateKey = admimPrivateKey.Replace("\r\n", "");
-            
+
             signerPrivateKey = signerPrivateKey.Replace("-----BEGIN PRIVATE KEY-----", "");
             signerPrivateKey = signerPrivateKey.Replace("-----END PRIVATE KEY-----", "");
             signerPrivateKey = signerPrivateKey.Replace("\r\n", "");
@@ -67,15 +67,16 @@ namespace TestApp
             container.RegisterEmbeddedFireblocksClient(adminConfig, signerConfig); //, new DelegateHandlerLogger());
             var provider = container.Build();
 
-            var vaultClient = provider.Resolve<IVaultClient>();
-            var accountsClient = provider.Resolve<IAccountsClient>();
-            var client = provider.Resolve<IClient>();
-            var transactionAdminClient = provider.Resolve<ITransactionsAdminClient>();
-            var transactionSignerClient = provider.Resolve<ITransactionsSignerClient>();
-            var gasStationClient = provider.Resolve<IGas_stationClient>();
+            var vaultClient = provider.Resolve<IVaultClientAdmin>();
+            var accountsClient = provider.Resolve<IAccountsClientAdmin>();
+            //var client = provider.Resolve<IClient>();
+            var transactionAdminClient = provider.Resolve<ITransactionsClientAdmin>();
+            var transactionSignerClient = provider.Resolve<ITransactionsClientSigner>();
 
             var embeddedAdminClient = provider.Resolve<IEmbeddedWalletAdminClient>();
             var embeddedSignerClient = provider.Resolve<IEmbeddedWalletSignerClient>();
+            var clienAdmin = provider.Resolve<IClientAdmin>();
+            var clientSigner = provider.Resolve<IClientSigner>();
 
 
             //var activator = provider.Resolve<KeyActivator>();
@@ -92,7 +93,7 @@ namespace TestApp
             {
                 WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd"
             }, default);
-            
+
             Console.WriteLine(JsonConvert.SerializeObject(wallet.Result, Formatting.Indented));
 
             Console.WriteLine("WalletsGetWalletKeySetupStateAsync:");
@@ -100,7 +101,7 @@ namespace TestApp
             {
                 WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd"
             }, default);
-            
+
             Console.WriteLine(JsonConvert.SerializeObject(walletSetupKeyState.Result, Formatting.Indented));
 
             // Console.WriteLine("CreateAccountAsync:");
@@ -110,20 +111,20 @@ namespace TestApp
             // }, default);
             //
             // Console.WriteLine(JsonConvert.SerializeObject(acountCreateResp, Formatting.Indented));
-            
-            
+
+
             Console.WriteLine("GetAccountsListAsync:");
             var accountList = await embeddedAdminClient.GetAccountByIdAsync(new FewAccountRequest()
             {
                 WalletId = "da24b489-dc68-460b-b0e8-0fcbfe5624fd",
                 AccountId = "1"
             }, default);
-            
+
             Console.WriteLine(JsonConvert.SerializeObject(accountList.Result, Formatting.Indented));
 
 
             var payload1 = @"{""method"":""get_service_certificates"",""params"":[{""names"":[""policy_service"",""signing_service"",""zona_service"",""nckms"",""ncw-service""]}],""headers"":{""physicalDeviceId"":""f88b3a5b-631a-4e42-9b68-39bef0fce0f8"",""mpcVersion"":""6"",""platformType"":""iOS"",""sdkVersion"":""2.9.1""}}";
-            
+
             Console.WriteLine($"RPC 1\n{payload1}");
 
             var recCall1 = await embeddedSignerClient.RpcInvokeAsync(
@@ -132,8 +133,8 @@ namespace TestApp
                 request: new FewRpcRequest()
                 {
                     Payload = payload1
-                }); 
-            
+                });
+
             Console.WriteLine(JsonConvert.SerializeObject(recCall1.Result, Formatting.Indented));
 
             // var resp = await embeddedAdminClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
@@ -176,54 +177,54 @@ namespace TestApp
                 //        WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
                 //    }, CancellationToken.None);
 
-                wallet = await embeddedAdminClient.WalletsGetByIdAsync(new FewWalletsGetByIdRequest()
-                {
-                    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
-                }, default);
+                //wallet = await embeddedAdminClient.WalletsGetByIdAsync(new FewWalletsGetByIdRequest()
+                //{
+                //    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                //}, default);
 
-                var acc = await embeddedSignerClient.GetAccountByIdAsync(new FewAccountRequest
-                {
-                    AccountId = "5",
-                    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
-                }, default);
+                //var acc = await embeddedSignerClient.GetAccountByIdAsync(new FewAccountRequest
+                //{
+                //    AccountId = "5",
+                //    WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                //}, default);
 
-                var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
-                    new FewAssetGetSupportedAssetsListRequest()
-                    {
-                        OnlyBaseAssets = true,
-                        PageCursor = "",
-                        PageSize = 10
-                    }, CancellationToken.None);
-                
-                var assetListSignerNext = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
-                    new FewAssetGetSupportedAssetsListRequest()
-                    {
-                        OnlyBaseAssets = true,
-                        PageCursor = assetListSigner.Result.Paging.Next, //"ETH:7"
-                        PageSize = 100
-                    }, CancellationToken.None);
-                //assetListSignerNext.Result.Paging.Next == null
+                //var assetListSigner = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                //    new FewAssetGetSupportedAssetsListRequest()
+                //    {
+                //        OnlyBaseAssets = true,
+                //        PageCursor = "",
+                //        PageSize = 10
+                //    }, CancellationToken.None);
 
-                var RR = await embeddedAdminClient.AssetsGetAssetsListAsync(new FewAssetsGetListRequest
-                {
-                        AccountId = "0",
-                        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
-                        Order = "ASC",
-                        PageCursor = "",
-                        PageSize = 50,
-                }, default);
+                //var assetListSignerNext = await embeddedSignerClient.AssetsGetSupportedAssetsListAsync(
+                //    new FewAssetGetSupportedAssetsListRequest()
+                //    {
+                //        OnlyBaseAssets = true,
+                //        PageCursor = assetListSigner.Result.Paging.Next, //"ETH:7"
+                //        PageSize = 100
+                //    }, CancellationToken.None);
+                ////assetListSignerNext.Result.Paging.Next == null
+
+                //var RR = await embeddedAdminClient.AssetsGetAssetsListAsync(new FewAssetsGetListRequest
+                //{
+                //        AccountId = "0",
+                //        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
+                //        Order = "ASC",
+                //        PageCursor = "",
+                //        PageSize = 50,
+                //}, default);
 
 
-                var assetListAdmin = await embeddedAdminClient.AssetsGetAssetAddressesListAsync(
-                    new FewAssetAddressesGetListRequest()
-                    {
-                        AccountId = "0",
-                        AssetId = "CELO_BAK",
-                        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
-                        PageCursor = "",
-                        PageSize = 50,
-                        Order = "ASC"
-                    }, CancellationToken.None);
+                //var assetListAdmin = await embeddedAdminClient.AssetsGetAssetAddressesListAsync(
+                //    new FewAssetAddressesGetListRequest()
+                //    {
+                //        AccountId = "0",
+                //        AssetId = "CELO_BAK",
+                //        WalletId = "c05ebc10-1080-41e4-9dd7-0946b758128a",
+                //        PageCursor = "",
+                //        PageSize = 50,
+                //        Order = "ASC"
+                //    }, CancellationToken.None);
 
                 //var add = await embeddedSignerClient.AssetsAddAssetAsync(new FewAssetRequest
                 //{
@@ -241,40 +242,99 @@ namespace TestApp
                 //    WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
                 //}, default);
 
-                var list = new List<FewAsset>();
-                foreach (var item in assetListSigner.Result.Data)
-                {
-                    try
-                    {
-                        var _asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
-                        {
-                            AccountId = "5",
-                            AssetId = item.Id,
-                            WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
-                        }, default);
+                //var list = new List<FewAsset>();
+                //foreach (var item in assetListSigner.Result.Data)
+                //{
+                //    try
+                //    {
+                //        var _asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
+                //        {
+                //            AccountId = "5",
+                //            AssetId = item.Id,
+                //            WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                //        }, default);
 
-                        list.Add(_asset.Result);
-                    }
-                    catch (Exception)
-                    {
-                    }                    
-                }
+                //        list.Add(_asset.Result);
+                //    }
+                //    catch (Exception)
+                //    {
+                //    }                    
+                //}
 
-                var asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
+                //var asset = await embeddedAdminClient.AssetsGetAssetByIdAsync(new FewAssetRequest
+                //{
+                //    AccountId = "0",
+                //    AssetId = "XLM_TEST",
+                //    WalletId = "58d483d7-6344-4943-9a9a-fd5cc1bffe8c"
+                //}, default);
+
+                var asset = await embeddedAdminClient.AssetsGetAssetAddressesListAsync(new FewAssetAddressesGetListRequest
                 {
-                    AccountId = "5",
-                    AssetId = "BTC_TEST",
-                    WalletId = "01e8a95e-6d56-4ae9-bc2a-636725ed7577"
+                    AccountId = "0",
+                    AssetId = "XLM_TEST",
+                    WalletId = "58d483d7-6344-4943-9a9a-fd5cc1bffe8c",
+                    PageSize = 50,
+                    PageCursor = ""
+                }, default);
+                //"GBCGW3XKUDNN7F6BTTVHUTUXF5GDIJBCCAFROZ4YS7AJMOAJINCS5UHN"
+                //"700875342"
+
+
+
+                //var assettSignerAdd = await embeddedSignerClient.AssetsAddAssetAsync(
+                //    new FewAssetRequest()
+                //    {
+                //        AccountId = "5",
+                //        AssetId = assetListSigner.Result.Data.First().Id,
+                //        WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
+                //    }, default);
+
+
+                //TODO: add requestId param in api
+                //TODO: webhooks
+                var walletId = Guid.Parse("58d483d7-6344-4943-9a9a-fd5cc1bffe8c");
+
+
+                var acc = await embeddedSignerClient.GetAccountByIdAsync(new FewAccountRequest
+                {
+                    AccountId = "0",
+                    WalletId = walletId.ToString()
+                }, default);
+                
+                var resp = await embeddedSignerClient.WalletsGetWalletKeySetupStateAsync(new FewWalletsGetByIdRequest()
+                {
+                    WalletId = walletId.ToString()
                 }, default);
 
+                var data = resp.Result;
 
-                var assettSignerAdd = await embeddedSignerClient.AssetsAddAssetAsync(
-                    new FewAssetRequest()
+                var tx = await clientSigner.TransactionsPostAsync(new TransactionRequest
+                {
+                    Source = new SourceTransferPeerPath
                     {
-                        AccountId = "5",
-                        AssetId = assetListSigner.Result.Data.First().Id,
-                        WalletId = "3d28f04c-a382-4658-876b-9921dee08139"
-                    }, default);
+                        Type = TransferPeerPathType.END_USER_WALLET,
+                        WalletId = walletId,
+                        Id = "0", //account id
+                        
+                    },
+                    Destination = new DestinationTransferPeerPath
+                    {
+                        Type = TransferPeerPathType.ONE_TIME_ADDRESS,
+                        OneTimeAddress = new OneTimeAddress
+                        {
+                            Address = "GCEK4HPCRZ642KYKP77TJURBKMOTKBIMP2MGEVFSW6WG2VQUJM4X6BM3",
+                            Tag = "1404986177"
+                        }
+                    },
+                    Amount = "10.66",
+                    AssetId = "XLM_TEST",
+                    FeeLevel = TransactionRequestFeeLevel.MEDIUM,
+                    ExternalTxId = "2222", //id of transaction from db transfer_{GUID}
+
+                }, walletId, "777777"); //12345 - requestId
+
+                var status = tx.StatusCode;
+                var txStatus = tx.Result.Status;
             }
             catch (Exception ex)
             {

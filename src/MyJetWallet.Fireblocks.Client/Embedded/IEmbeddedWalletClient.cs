@@ -61,34 +61,6 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
 
         #endregion
 
-        #region Transactions
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create a new transaction
-        /// </summary>
-        /// <remarks>
-        /// Creates a new transaction. This endpoint can be used for regular Transfers, Contract Calls, Raw &amp; Typed message signing.
-        /// <br/>- For Transfers, the required parameters are: `assetId`, `source`, `destination` and `amount`.
-        /// <br/>
-        /// <br/>- For Contract Calls, the required parameters are: `operation.CONTRACT_CALL`, `assetId` (Base Asset), `source`, `destination`, `amount` (usually 0) and `extraParameters` object with `contractCallData` string.
-        /// <br/>
-        /// <br/>- For RAW and Typed messages signing, the required parameters are: `operation.RAW/TYPED_MESSAGE`, `assetId` or `derivationPath`, `source` or `derivationPath`, `extraParameters` with [rawMessageData object](https://developers.fireblocks.com/reference/raw-signing-objects).
-        /// <br/>
-        /// <br/>- Typed Message Signing is supported for the following asset IDs: 'ETH', 'BTC' and 'TRX'. [Typed Message Signing Guide](https://developers.fireblocks.com/docs/typed-message-signing-overview).
-        /// <br/>
-        /// <br/>- For MEV Protection configuration the required parameters are:
-        /// <br/>  `extraParameters` with the [`nodeControls` object](https://developers.fireblocks.com/reference/transaction-objects#nodecontrols)
-        /// <br/>  Note: MEV Protection is a premium feature. Please contact your Customer Success Manager or the Fireblocks Support team for more information.
-        /// </remarks>
-        /// <param name="x_End_User_Wallet_Id">Unique ID of the End-User wallet to the API request. Required for end-user wallet operations.</param>
-        /// <param name="idempotency_Key">A unique identifier for the request. If the request is sent multiple times with the same idempotency key, the server will return the same response as the first request. The idempotency key is valid for 24 hours.</param>
-        /// <returns>A transaction object</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        Task<Response<CreateTransactionResponse>> TransactionsPostAsync(TransactionRequest body, System.Guid? x_End_User_Wallet_Id = null, string idempotency_Key = null, CancellationToken cancellationToken = default);
-
-        #endregion
-
         #region RPC
 
         Task<Response<string>> RpcInvokeAsync(string walletId, string deviceId, FewRpcRequest request, CancellationToken cancellationToken = default);

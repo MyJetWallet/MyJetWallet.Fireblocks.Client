@@ -136,85 +136,85 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
 
             builder
                 .RegisterInstance(new VaultClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IVaultClient>()
+                .As<IVaultClientAdmin>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new VaultClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+                .As<IVaultClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
                 .RegisterInstance(new AccountsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IAccountsClient>()
+                .As<IAccountsClientAdmin>()
+                .AutoActivate()
+                .SingleInstance();
+
+            builder
+                .RegisterInstance(new AccountsClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+                .As<IAccountsClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
                 .RegisterInstance(new AddressesClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IAddressesClient>()
+                .As<IAddressesClientAdmin>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new Client(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IClient>()
+                .RegisterInstance(new AddressesClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+                .As<IAddressesClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new Internal_walletsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IInternal_walletsClient>()
-                .AutoActivate()
-                .SingleInstance();
+              .RegisterInstance(new Client(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
+              .As<IClientAdmin>()
+              .AutoActivate()
+              .SingleInstance();
 
             builder
-                .RegisterInstance(new External_walletsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IExternal_walletsClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new Exchange_accountsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IExchange_accountsClient>()
-                .AutoActivate()
-                .SingleInstance();
-
-            builder
-                .RegisterInstance(new Fiat_accountsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IFiat_accountsClient>()
-                .AutoActivate()
-                .SingleInstance();
+              .RegisterInstance(new Client(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+              .As<IClientSigner>()
+              .AutoActivate()
+              .SingleInstance();
 
             builder
                 .RegisterInstance(new TransactionsClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<ITransactionsAdminClient>()
+                .As<ITransactionsClientAdmin>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
                 .RegisterInstance(new TransactionsClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
-                .As<ITransactionsSignerClient>()
+                .As<ITransactionsClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
                 .RegisterInstance(new TxHashClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<ITxHashClient>()
+                .As<ITxHashClientAdmin>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new Gas_stationClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IGas_stationClient>()
+                .RegisterInstance(new TxHashClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+                .As<ITxHashClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
                 .RegisterInstance(new WebhooksClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IWebhooksClient>()
+                .As<IWebhooksClientAdmin>()
                 .AutoActivate()
                 .SingleInstance();
 
             builder
-                .RegisterInstance(new Off_exchangeClient(clientConfiguratorAdmin, httpClientAdmin) { BaseUrl = baseUrlAdmin })
-                .As<IOff_exchangeClient>()
+                .RegisterInstance(new WebhooksClient(clientConfiguratorSigner, httpClientSigner) { BaseUrl = baseUrlSigner })
+                .As<IWebhooksClientSigner>()
                 .AutoActivate()
                 .SingleInstance();
 
