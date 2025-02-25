@@ -1,4 +1,5 @@
 ﻿using MyJetWallet.Fireblocks.Client.Embedded;
+using System.Linq;
 
 namespace MyJetWallet.Fireblocks.Client
 {
@@ -50,5 +51,33 @@ namespace MyJetWallet.Fireblocks.Client
 
     public interface IWebhooksClientAdmin : IWebhooksClient { }
     public interface IWebhooksClientSigner : IWebhooksClient { }
+
+
+    public partial class ApiException<TResult> : ApiException
+    {
+        public override string ToString()
+        {
+            return string.Format("{0}\n\n{1}", Result.ToString(), base.ToString());
+        }
+    }
+
+    public partial class ErrorSchema
+    {
+        public string ErrorCode
+        {
+            get
+            {
+                if (AdditionalProperties?.ContainsKey("error") ?? false)
+                    return AdditionalProperties["error"].ToString();
+
+                return null;
+            }
+        }
+        public override
+            string ToString()
+        {
+            return $"ErrorSchema: {{ Message: {Message}, Code: {Code}, ErrorCode: {ErrorCode} }}";
+        }
+    }
 }
-    
+

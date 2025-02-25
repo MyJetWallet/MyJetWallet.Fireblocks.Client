@@ -14,6 +14,17 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Code { get; set; }
 
+        public string ErrorCode
+        {
+            get
+            {
+                if (AdditionalProperties?.ContainsKey("error") ?? false)
+                    return AdditionalProperties["error"].ToString();
+
+                return null;
+            }
+        }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
         [Newtonsoft.Json.JsonExtensionData]
@@ -23,5 +34,9 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
             set { _additionalProperties = value; }
         }
 
+        public override string ToString()
+        {
+            return $"FewErrorSchema: {{ Message: {Message}, Code: {Code ?? "null"}, ErrorCode: {ErrorCode} }}";
+        }
     }
 }
