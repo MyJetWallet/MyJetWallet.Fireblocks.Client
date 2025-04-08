@@ -66,9 +66,12 @@ Generate Fireblocks API Client flow
         ETH_CONTRACT = 12,
     
         [System.Runtime.Serialization.EnumMember(Value = @"XRP_ASSET")]
-        XRP_ASSET = 13
+        XRP_ASSET = 13,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"ERC721")]
+        ERC721 = 14
 
-7. Add to enum ExchangeType:
+8. Add to enum ExchangeType:
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
