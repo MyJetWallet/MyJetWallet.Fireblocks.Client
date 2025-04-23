@@ -21,6 +21,10 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
         
         Task<Response<FewWalletsGetLatestBackupDetailsResponse>> WalletsGetWalletLatestBackupDetailsAsync(FewWalletsGetByIdRequest request, CancellationToken cancellationToken = default);
 
+        Task<Response<FewWalletsGetPublicKeyOfAssetResponse>> WalletsGetPublicKeyOfAssetAsync(FewWalletsGetPublicKeyOfAssetRequest request, CancellationToken cancellationToken = default);
+
+        Task<Response<FewWalletsGetPublicKeyForDerivationPathResponse>> WalletsGetPublicKeyForDerivationPathAsync(FewWalletsGetPublicKeyForDerivationPathRequest request, CancellationToken cancellationToken = default);
+
         #endregion
 
         #region Accounts

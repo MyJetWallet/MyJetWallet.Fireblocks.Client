@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MyJetWallet.Fireblocks.Client.Embedded
 {
@@ -507,6 +506,198 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return new Response<FewWalletsGetLatestBackupDetailsResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<FewErrorSchema>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<FewErrorSchema>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        public async Task<Response<FewWalletsGetPublicKeyOfAssetResponse>> WalletsGetPublicKeyOfAssetAsync(FewWalletsGetPublicKeyOfAssetRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(request.WalletId))
+                throw new ArgumentNullException("walletId");
+
+            if (string.IsNullOrEmpty(request.AccountId))
+                throw new ArgumentNullException("accountId");
+
+            if (string.IsNullOrEmpty(request.AssetId))
+                throw new ArgumentNullException("assetId");
+            
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new HttpRequestMessage())
+                {
+                    request_.Method = new HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "ncw/{walletId}/accounts/{accountId}/{assetId}/{change}/{addressIndex}/public_key_info"
+                    urlBuilder_.Append("ncw/");
+                    urlBuilder_.Append(Uri.EscapeDataString(request.WalletId));
+                    urlBuilder_.Append("/accounts/");
+                    urlBuilder_.Append(Uri.EscapeDataString(request.AccountId));
+                    urlBuilder_.Append("/");
+                    urlBuilder_.Append(Uri.EscapeDataString(request.AssetId));
+                    urlBuilder_.Append("/");
+                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.Change, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/");
+                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(request.AddressIndex, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/public_key_info");
+
+                    if (request.Compressed)
+                    {
+                        urlBuilder_.Append("?");
+                        urlBuilder_.Append(Uri.EscapeDataString("compressed")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Compressed, System.Globalization.CultureInfo.InvariantCulture)));
+                    }
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<FewWalletsGetPublicKeyOfAssetResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Response<FewWalletsGetPublicKeyOfAssetResponse>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<FewErrorSchema>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<FewErrorSchema>("Error Response", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        public async Task<Response<FewWalletsGetPublicKeyForDerivationPathResponse>> WalletsGetPublicKeyForDerivationPathAsync(FewWalletsGetPublicKeyForDerivationPathRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(request.WalletId))
+                throw new ArgumentNullException("walletId");
+
+            if (string.IsNullOrEmpty(request.DerivationPath))
+                throw new ArgumentNullException("derivationPath");
+
+            if (string.IsNullOrEmpty(request.Algorithm))
+                throw new ArgumentNullException("algorithm");
+
+            
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new HttpRequestMessage())
+                {
+                    request_.Method = new HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "ncw/{walletId}/public_key_info"
+                    urlBuilder_.Append("ncw/");
+                    urlBuilder_.Append(Uri.EscapeDataString(request.WalletId));
+                    urlBuilder_.Append("/public_key_info?");
+                    urlBuilder_.Append(Uri.EscapeDataString("derivationPath")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.DerivationPath, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("&");
+                    urlBuilder_.Append(Uri.EscapeDataString("algorithm")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Algorithm, System.Globalization.CultureInfo.InvariantCulture)));
+                    
+                    if (request.Compressed)
+                    {
+                        urlBuilder_.Append("&");
+                        urlBuilder_.Append(Uri.EscapeDataString("compressed")).Append('=').Append(Uri.EscapeDataString(ConvertToString(request.Compressed, System.Globalization.CultureInfo.InvariantCulture)));
+                    }
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<FewWalletsGetPublicKeyForDerivationPathResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new Response<FewWalletsGetPublicKeyForDerivationPathResponse>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         {
