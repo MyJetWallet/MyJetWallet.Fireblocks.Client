@@ -37320,6 +37320,10 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"SUPPLY_TO_COMPOUND")]
         SUPPLY_TO_COMPOUND = 11,
+        
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"APPROVE")]
+        APPROVE = 101,
 
     }
 
