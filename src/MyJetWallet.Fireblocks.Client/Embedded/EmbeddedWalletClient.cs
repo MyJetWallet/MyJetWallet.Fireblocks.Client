@@ -1825,7 +1825,12 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
             {
                 using (var request_ = new HttpRequestMessage())
                 {
-                    var json_ = JsonConvert.SerializeObject(request.Enabled, JsonSerializerSettings);
+                    var body = new FewDevicesCnahgeEnabledRequestBody
+                    {
+                        Enabled = request.Enabled
+                    };
+
+                    var json_ = JsonConvert.SerializeObject(body, JsonSerializerSettings);
                     var content_ = new StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
