@@ -1831,6 +1831,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     };
 
                     var json_ = JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    //Console.WriteLine($"REQUEST: {json_}");
                     var content_ = new StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -1849,6 +1850,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                     PrepareRequest(client_, request_, urlBuilder_);
 
                     var url_ = urlBuilder_.ToString();
+                    //Console.WriteLine($"URL: {url_}");
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
 
                     PrepareRequest(client_, request_, url_);
@@ -1871,8 +1873,7 @@ namespace MyJetWallet.Fireblocks.Client.Embedded
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<bool>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            return new Response<bool>(status_, headers_, objectResponse_.Object);
+                            return new Response<bool>(status_, headers_, true);
                         }
                         else
                         {
