@@ -31,7 +31,8 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         private JwtPayload GetPayload(HttpRequestMessage msg)
         {
             var now = DateTimeOffset.UtcNow;
-            var nonce = now.ToUnixTimeMilliseconds();
+            var nonce = now.Ticks;
+            
             var issuedTimestamp = now.ToUnixTimeSeconds();
             var expirationTimestamp = issuedTimestamp + 20;
             var body = msg.Content?.ReadAsStringAsync().GetAwaiter().GetResult() ?? string.Empty;

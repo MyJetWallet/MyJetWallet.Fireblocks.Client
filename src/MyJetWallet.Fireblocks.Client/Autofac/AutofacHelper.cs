@@ -244,7 +244,7 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
             var keyActivator = new KeyActivator();
 
             var auth = new ApiKeyHeaderGenerator(clientConfigurator, new JwtTokenGenerator(clientConfigurator, keyActivator), keyActivator);
-            var handlersWithAuth = new List<DelegatingHandler> { new AuthHandler(auth) };
+            var handlersWithAuth = new List<DelegatingHandler> { new NonceErrorHandler(), new AuthHandler(auth) };
 
             keyActivator.ActivateKeys(clientConfigurator.ApiKey, clientConfigurator.ApiPrivateKey);
 
