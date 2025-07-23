@@ -78,3 +78,15 @@ Generate Fireblocks API Client flow
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
+
+9. fix API specification:
+
+  In class RawMessageData
+   - public `RawMessageDataAlgorithm? Algorithm { get; set; }` Algorithm should be nullable
+
+  In class SourceTransferPeerPath:
+   - `public TransferPeerPathSubType? SubType { get; set; }` SubType should be nullable
+
+  In class UnsignedMessage:
+   - `public int? Bip44addressIndex { get; set; }` Bip44addressIndex should be nullable
+   - `public double? Bip44change { get; set; }` Bip44change should be nullable

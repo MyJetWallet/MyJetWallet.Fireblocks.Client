@@ -37950,13 +37950,13 @@ namespace MyJetWallet.Fireblocks.Client
         /// BIP44 address index
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bip44addressIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Bip44addressIndex { get; set; }
+        public int? Bip44addressIndex { get; set; }
 
         /// <summary>
         /// BIP44 change index
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bip44change", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Bip44change { get; set; }
+        public double? Bip44change { get; set; }
 
         /// <summary>
         /// BIP44 full derivation path
@@ -38568,7 +38568,7 @@ namespace MyJetWallet.Fireblocks.Client
 
         [Newtonsoft.Json.JsonProperty("subType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public TransferPeerPathSubType SubType { get; set; }
+        public TransferPeerPathSubType? SubType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
@@ -50345,7 +50345,7 @@ namespace MyJetWallet.Fireblocks.Client
 
         [Newtonsoft.Json.JsonProperty("algorithm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public RawMessageDataAlgorithm Algorithm { get; set; }
+        public RawMessageDataAlgorithm? Algorithm { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
