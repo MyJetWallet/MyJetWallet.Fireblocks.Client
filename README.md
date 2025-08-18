@@ -74,6 +74,9 @@ Generate Fireblocks API Client flow
         [System.Runtime.Serialization.EnumMember(Value = @"ERC1155")]
         ERC1155 = 15
 
+        [System.Runtime.Serialization.EnumMember(Value = @"TOKEN")]
+        TOKEN = 16
+
 8. Add to enum ExchangeType:
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]

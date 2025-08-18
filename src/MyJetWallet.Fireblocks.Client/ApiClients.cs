@@ -50062,7 +50062,10 @@ namespace MyJetWallet.Fireblocks.Client
         ERC721 = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ERC1155")]
-        ERC1155 = 15
+        ERC1155 = 15,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"TOKEN")]
+        TOKEN = 16,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
