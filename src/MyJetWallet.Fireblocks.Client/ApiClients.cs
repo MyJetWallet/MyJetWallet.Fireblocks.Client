@@ -50066,6 +50066,9 @@ namespace MyJetWallet.Fireblocks.Client
         
         [System.Runtime.Serialization.EnumMember(Value = @"TOKEN")]
         TOKEN = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"SUI_ASSET")]
+        SUI_ASSET = 17,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]

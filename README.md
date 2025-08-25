@@ -77,6 +77,9 @@ Generate Fireblocks API Client flow
         [System.Runtime.Serialization.EnumMember(Value = @"TOKEN")]
         TOKEN = 16
 
+        [System.Runtime.Serialization.EnumMember(Value = @"SUI_ASSET")]
+        SUI_ASSET = 17,
+
 8. Add to enum ExchangeType:
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
