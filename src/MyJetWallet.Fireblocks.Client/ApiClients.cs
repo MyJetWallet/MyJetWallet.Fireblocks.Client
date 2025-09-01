@@ -37942,9 +37942,9 @@ namespace MyJetWallet.Fireblocks.Client
         /// <br/>Should be 32 bytes long for ECDSA (hash of the actual message to sign) or any length for EdDSA as prehashing is not required.
         /// <br/>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.Default)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Content { get; set; }
+        public object Content { get; set; }
 
         /// <summary>
         /// BIP44 address index

@@ -96,3 +96,10 @@ Generate Fireblocks API Client flow
   In class UnsignedMessage:
    - `public int? Bip44addressIndex { get; set; }` Bip44addressIndex should be nullable
    - `public double? Bip44change { get; set; }` Bip44change should be nullable
+   - `public string Content { get; set; }` Content should be nullable and typed like object
+
+   In class AmountInfo:
+   - `public string Amount { get; set; }` Amount should be nullable
+   - `public string RequestedAmount { get; set; }` RequestedAmount should be nullable
+   - `public string NetAmount { get; set; }` NetAmount should be nullable
+   - `public string AmountUSD { get; set; }` AmountUSD should be nullable
