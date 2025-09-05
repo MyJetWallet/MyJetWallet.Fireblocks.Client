@@ -38351,21 +38351,21 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>
         /// The amount requested by the user. Deprecated - please use the `amountInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("requestedAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double RequestedAmount { get; set; }
 
         /// <summary>
         /// If the transfer is a withdrawal from an exchange, the actual amount that was requested to be transferred. Otherwise, the requested amount. Deprecated - please use the `amountInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double Amount { get; set; }
 
         /// <summary>
         /// The net amount of the transaction, after fee deduction. Deprecated - please use the `amountInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("netAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double NetAmount { get; set; }
 
@@ -38379,21 +38379,21 @@ namespace MyJetWallet.Fireblocks.Client
         /// <summary>
         /// The total fee deducted by the exchange from the actual requested amount (`serviceFee` = `amount` - `netAmount`). Deprecated - please use the `feeInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("serviceFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double ServiceFee { get; set; }
 
         /// <summary>
         /// Deprecated - please use the `feeInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double Fee { get; set; }
 
         /// <summary>
         /// The fee paid to the network. Deprecated - please use the `feeInfo` field for accuracy.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("networkFee", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
         public double NetworkFee { get; set; }
 

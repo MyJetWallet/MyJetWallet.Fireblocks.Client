@@ -13,6 +13,12 @@
       <None Update="test_API_EW_Admin_secret.key">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="test_GAS_ST__API_EW_Private_Key.key">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="test_GAS_ST__API_EW_Signer_secret.key">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="test_API_EW_Signer_secret.key">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
