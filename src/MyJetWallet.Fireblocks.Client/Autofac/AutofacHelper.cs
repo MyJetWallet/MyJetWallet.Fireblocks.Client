@@ -231,7 +231,7 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
                 .SingleInstance();
         }
 
-        private static HttpClient CreateHttpClient(ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)
+        public static HttpClient CreateHttpClient(ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)
         {
             var baseUrl = clientConfigurator.BaseUrl;
 

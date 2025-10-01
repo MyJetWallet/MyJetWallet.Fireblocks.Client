@@ -28,7 +28,8 @@ public static class EIP3009Helper
         return "0x" + BitConverter.ToString(combinedBytes).Replace("-", "").ToLower();
     }
 
-    public static string GenerateUsdcTransferWithAuthorizationMessage(string from, string to, decimal amount, double contractDecimals, string nonce, long validBeforeUnix)
+    public static string GenerateTransferWithAuthorizationMessage(string from, string to, decimal amount, double contractDecimals, string nonce, long validBeforeUnix,
+        string contractName, string contractVersion, int contractChainId, string verifyingContract)
     {
         amount = amount * (decimal)Math.Pow(10, contractDecimals);
 
@@ -42,10 +43,10 @@ public static class EIP3009Helper
 
         var domain = new Dictionary<string, object>
         {
-            { "name", "USD Coin" },
-            { "version", "2" },
-            { "chainId", 137 },
-            { "verifyingContract", "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359" }
+            { "name", contractName},
+            { "version",  contractVersion},
+            { "chainId",  contractChainId},
+            { "verifyingContract",  verifyingContract}
         };
 
         var types = new Dictionary<string, object>
@@ -93,10 +94,10 @@ public static class EIP3009Helper
     }
 
     public static TransactionRequest GenerateContractCallTransferWithAuthorization(
-    string valutAccountId, string assetId, string smartContractAddress, string methodId, 
-    string from, string to, string nonce, decimal amount, int contractDecimals, long validBeforeUnix, 
+    string valutAccountId, string assetId, string smartContractAddress, string methodId,
+    string from, string to, string nonce, decimal amount, int contractDecimals, long validBeforeUnix,
     string r, string s, int v, TransactionRequestFeeLevel feeLevel)
-    {        
+    {
         long amountLong = (long)(amount * (long)Math.Pow(10, contractDecimals));
 
         if (string.IsNullOrEmpty(methodId))
@@ -121,7 +122,7 @@ public static class EIP3009Helper
             new ABIValue("bytes32", nonce.HexToByteArray()),
             new ABIValue("uint8", _v),
             new ABIValue("bytes32", r.HexToByteArray()),
-            new ABIValue("bytes32", s.HexToByteArray())            
+            new ABIValue("bytes32", s.HexToByteArray())
             ).ToHex();
 
         var resp = new TransactionRequest()
