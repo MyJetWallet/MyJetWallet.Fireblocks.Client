@@ -147,10 +147,32 @@ public static class EIP3009Helper
                 ContractCallData = data
             },
             Operation = TransactionOperation.CONTRACT_CALL,
-            ExternalTxId = $"ContractCall_TWA_{Guid.NewGuid()}",
+            ExternalTxId = GenerateUniqueKey("ContractCall_TWA_"),
             FeeLevel = feeLevel
         };
 
         return resp;
+    }
+
+    public static string GenerateUniqueKey(string prefix)
+    {
+        byte[] tickBytes = BitConverter.GetBytes(DateTime.UtcNow.Ticks); // 8 bytes
+
+        byte[] random = new byte[8];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(random);
+        }
+
+        byte[] combinedBytes = new byte[16];
+        Array.Copy(tickBytes, 0, combinedBytes, 0, 8);
+        Array.Copy(random, 0, combinedBytes, 8, 8);
+
+        string uniqueId = Convert.ToBase64String(combinedBytes)
+                             .Replace("/", "_")
+                             .Replace("+", "-")[..21];
+
+        // uniqueId - 21 characters
+        return $"{prefix}{uniqueId}";
     }
 }
