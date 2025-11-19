@@ -121,3 +121,8 @@ Generate Fireblocks API Client flow
    - `public string RequestedAmount { get; set; }` RequestedAmount should be nullable
    - `public string NetAmount { get; set; }` NetAmount should be nullable
    - `public string AmountUSD { get; set; }` AmountUSD should be nullable
+
+ 10. Add to enum TransactionSubStatus:
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"INVALID_TYPED_MESSAGE_PARAMETERS")]
+        INVALID_TYPED_MESSAGE_PARAMETERS = 115,
