@@ -102,6 +102,8 @@ Generate Fireblocks API Client flow
      
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
+        [System.Runtime.Serialization.EnumMember(Value = @"WHITEBIT")]
+        WHITEBIT = 27,
 
 9. fix API specification:
 

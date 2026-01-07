@@ -34985,6 +34985,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"BYBIT_V2")]
         BYBIT_V2 = 26,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"WHITEBIT")]
+        WHITEBIT = 27,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
