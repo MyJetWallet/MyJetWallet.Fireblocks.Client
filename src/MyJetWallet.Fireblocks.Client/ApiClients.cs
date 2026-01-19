@@ -8281,9 +8281,7 @@ namespace MyJetWallet.Fireblocks.Client
                     }
  
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                                        
-                    System.Console.WriteLine($"=== JSON OUTPUT TransactionsPostAsync === \n\n Body: {json_} \n\n X-End-User-Wallet-Id: {x_End_User_Wallet_Id} \n\n Idempotency-Key: {idempotency_Key} \n\n =======================================");
-                                
+                                                                        
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
