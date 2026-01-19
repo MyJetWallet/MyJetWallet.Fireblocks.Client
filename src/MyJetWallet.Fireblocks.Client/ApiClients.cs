@@ -8271,17 +8271,18 @@ namespace MyJetWallet.Fireblocks.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-
                     if (x_End_User_Wallet_Id != null)
+                    {
                         request_.Headers.TryAddWithoutValidation("X-End-User-Wallet-Id", ConvertToString(x_End_User_Wallet_Id, System.Globalization.CultureInfo.InvariantCulture));
-
+                    }
                     if (idempotency_Key != null)
+                    {           
                         request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
+                    }
+ 
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    
-                    System.Console.WriteLine("=== JSON OUTPUT TransactionsPostAsync ===");
-                    System.Console.WriteLine(json_);
-                    System.Console.WriteLine("=======================================");        
+                                        
+                    System.Console.WriteLine($"=== JSON OUTPUT TransactionsPostAsync === \n\n Body: {json_} \n\n X-End-User-Wallet-Id: {x_End_User_Wallet_Id} \n\n Idempotency-Key: {idempotency_Key} \n\n =======================================");
                                 
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
