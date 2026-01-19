@@ -8278,6 +8278,11 @@ namespace MyJetWallet.Fireblocks.Client
                     if (idempotency_Key != null)
                         request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
+                    
+                    System.Console.WriteLine("=== JSON OUTPUT TransactionsPostAsync ===");
+                    System.Console.WriteLine(json_);
+                    System.Console.WriteLine("=======================================");        
+                                
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
