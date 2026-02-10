@@ -37267,6 +37267,9 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"INVALID_TYPED_MESSAGE_PARAMETERS")]
         INVALID_TYPED_MESSAGE_PARAMETERS = 115,
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"UNAUTHORISED__MISSING_PERMISSION")]
+        UNAUTHORISED__MISSING_PERMISSION = 116,
 
         [System.Runtime.Serialization.EnumMember(Value = @"UNSUPPORTED_DESIGNATED_SIGNERS")]
         UNSUPPORTED_DESIGNATED_SIGNERS = 10001,
