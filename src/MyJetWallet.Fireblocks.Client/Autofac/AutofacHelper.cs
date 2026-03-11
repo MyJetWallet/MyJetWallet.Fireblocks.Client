@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using MyJetWallet.ApiSecurityManager.ApiKeys;
 using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.DelegateHandlers;
 using MyJetWallet.Fireblocks.Client.Embedded;
@@ -229,6 +230,52 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
                 .As<IEmbeddedWalletSignerClient>()
                 .AutoActivate()
                 .SingleInstance();
+        }
+
+        public static void RegisterEmbeddedFireblocksClientFromStorage(this ContainerBuilder builder,
+            EmbeddedFireblocksStorageOptions options)
+        {
+            builder.Register(ctx =>
+            {
+                var storage = ctx.Resolve<IApiKeyStorage>();
+
+                var adminKeys  = storage.Get(options.AdminKeyId);
+                var signerKeys = storage.Get(options.SignerKeyId);
+
+                var adminConfig = new ClientConfigurator
+                {
+                    BaseUrl       = options.BaseUrl,
+                    ApiKey        = adminKeys?.ApiKeyValue    ?? options.FallbackAdminApiKey,
+                    ApiPrivateKey = adminKeys?.PrivateKeyValue ?? options.FallbackAdminPrivateKey,
+                };
+                var signerConfig = new ClientConfigurator
+                {
+                    BaseUrl       = options.BaseUrl,
+                    ApiKey        = signerKeys?.ApiKeyValue    ?? options.FallbackSignerApiKey,
+                    ApiPrivateKey = signerKeys?.PrivateKeyValue ?? options.FallbackSignerPrivateKey,
+                };
+
+                return new FireblocksEmbeddedClients(adminConfig, signerConfig);
+            })
+            .As<FireblocksEmbeddedClients>()
+            .SingleInstance();
+
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().VaultAdmin).As<IVaultClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().VaultSigner).As<IVaultClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().AccountsAdmin).As<IAccountsClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().AccountsSigner).As<IAccountsClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().AddressesAdmin).As<IAddressesClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().AddressesSigner).As<IAddressesClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().ClientAdmin).As<IClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().ClientSigner).As<IClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().TransactionsAdmin).As<ITransactionsClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().TransactionsSigner).As<ITransactionsClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().TxHashAdmin).As<ITxHashClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().TxHashSigner).As<ITxHashClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().WebhooksAdmin).As<IWebhooksClientAdmin>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().WebhooksSigner).As<IWebhooksClientSigner>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().EmbeddedWalletAdmin).As<IEmbeddedWalletAdminClient>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().EmbeddedWalletSigner).As<IEmbeddedWalletSignerClient>().SingleInstance();
         }
 
         public static HttpClient CreateHttpClient(ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)
