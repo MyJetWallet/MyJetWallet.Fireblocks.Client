@@ -60,11 +60,15 @@ namespace MyJetWallet.Fireblocks.Client.Auth
             {
                 _fireblocksConfiguration.ApiKey = apiKey;
                 _fireblocksConfiguration.ApiPrivateKey = privateKey;
-                _rsa?.Dispose();
-                _rsa = RSA.Create();
-                _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
-                var securityKey = new RsaSecurityKey(_rsa);
-                _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
+
+                var newRsa = RSA.Create();
+                newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
+                var newCredentials = new SigningCredentials(new RsaSecurityKey(newRsa), SecurityAlgorithms.RsaSha256);
+
+                var oldRsa = _rsa;
+                _rsa = newRsa;
+                _signingCredentials = newCredentials;
+                oldRsa?.Dispose();
             }
             catch (Exception e)
             {
