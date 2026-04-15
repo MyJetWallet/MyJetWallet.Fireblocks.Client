@@ -10,7 +10,7 @@ namespace MyJetWallet.Fireblocks.Client
     public partial class TransactionResponse
     {
         [Newtonsoft.Json.JsonProperty("assetType")]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(MyJetWallet.Fireblocks.Client.FallbackStringEnumConverter))]
         public AssetTypeResponseType AssetType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("replacedTxHash")]
