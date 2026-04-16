@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
     {
         private readonly ClientConfigurator _fireblocksConfiguration;
         private readonly KeyActivator _keyActivator;
-        private SigningCredentials _signingCredentials;
+        private volatile SigningCredentials _signingCredentials;
         private RSA _rsa;
 
         public JwtTokenGenerator(ClientConfigurator configuration, KeyActivator keyActivator)
@@ -58,17 +59,24 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             try
             {
+                if (_signingCredentials != null
+                    && _fireblocksConfiguration.ApiKey == apiKey
+                    && _fireblocksConfiguration.ApiPrivateKey == privateKey)
+                    return;
+
                 _fireblocksConfiguration.ApiKey = apiKey;
                 _fireblocksConfiguration.ApiPrivateKey = privateKey;
 
                 var newRsa = RSA.Create();
-                newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
+                newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(privateKey), out _);
                 var newCredentials = new SigningCredentials(new RsaSecurityKey(newRsa), SecurityAlgorithms.RsaSha256);
 
                 var oldRsa = _rsa;
                 _rsa = newRsa;
                 _signingCredentials = newCredentials;
-                oldRsa?.Dispose();
+
+                if (oldRsa != null)
+                    Task.Run(async () => { await Task.Delay(30_000); oldRsa.Dispose(); });
             }
             catch (Exception e)
             {
