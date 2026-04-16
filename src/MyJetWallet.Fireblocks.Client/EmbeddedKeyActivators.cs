@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using MyJetWallet.Fireblocks.Client.Auth;
 
 namespace MyJetWallet.Fireblocks.Client
@@ -11,6 +13,18 @@ namespace MyJetWallet.Fireblocks.Client
         {
             Admin = admin;
             Signer = signer;
+        }
+
+        public async Task WaitForActivationAsync(int maxWaitSeconds = 10)
+        {
+            if (Admin.IsActivated && Signer.IsActivated)
+                return;
+
+            for (var i = 0; i < maxWaitSeconds && (!Admin.IsActivated || !Signer.IsActivated); i++)
+                await Task.Delay(1000);
+
+            if (!Admin.IsActivated || !Signer.IsActivated)
+                throw new Exception($"Fireblocks keys not activated within {maxWaitSeconds}s");
         }
     }
 }
