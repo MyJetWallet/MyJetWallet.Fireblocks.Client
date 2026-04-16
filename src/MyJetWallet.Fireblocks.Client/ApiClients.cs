@@ -36600,7 +36600,7 @@ namespace MyJetWallet.Fireblocks.Client
         /// </summary>
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(MyJetWallet.Fireblocks.Client.FallbackStringEnumConverter))]
         public AssetTypeResponseType Type { get; set; }
 
         /// <summary>
@@ -50090,6 +50090,12 @@ namespace MyJetWallet.Fireblocks.Client
 
         [System.Runtime.Serialization.EnumMember(Value = @"SUI_ASSET")]
         SUI_ASSET = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PROVENANCE_MARKER_TOKEN")]
+        PROVENANCE_MARKER_TOKEN = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"UNKNOWN")]
+        UNKNOWN = 999,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]

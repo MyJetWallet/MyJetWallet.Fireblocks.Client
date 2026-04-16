@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
     {
         private readonly ClientConfigurator _fireblocksConfiguration;
         private readonly KeyActivator _keyActivator;
-        private SigningCredentials _signingCredentials;
+        private volatile SigningCredentials _signingCredentials;
         private RSA _rsa;
 
         public JwtTokenGenerator(ClientConfigurator configuration, KeyActivator keyActivator)
@@ -58,13 +59,24 @@ namespace MyJetWallet.Fireblocks.Client.Auth
         {
             try
             {
+                if (_signingCredentials != null
+                    && _fireblocksConfiguration.ApiKey == apiKey
+                    && _fireblocksConfiguration.ApiPrivateKey == privateKey)
+                    return;
+
                 _fireblocksConfiguration.ApiKey = apiKey;
                 _fireblocksConfiguration.ApiPrivateKey = privateKey;
-                _rsa?.Dispose();
-                _rsa = RSA.Create();
-                _rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_fireblocksConfiguration.ApiPrivateKey), out _);
-                var securityKey = new RsaSecurityKey(_rsa);
-                _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
+
+                var newRsa = RSA.Create();
+                newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(privateKey), out _);
+                var newCredentials = new SigningCredentials(new RsaSecurityKey(newRsa), SecurityAlgorithms.RsaSha256);
+
+                var oldRsa = _rsa;
+                _rsa = newRsa;
+                _signingCredentials = newCredentials;
+
+                if (oldRsa != null)
+                    Task.Run(async () => { await Task.Delay(30_000); oldRsa.Dispose(); });
             }
             catch (Exception e)
             {
@@ -94,7 +106,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
 
         public void Dispose()
         {
-            _rsa.Dispose();
+            _rsa?.Dispose();
             _keyActivator.KeyActivatedEvent -= Activate;
         }
     }

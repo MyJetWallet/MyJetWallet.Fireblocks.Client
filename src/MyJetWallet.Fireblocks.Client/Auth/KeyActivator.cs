@@ -9,6 +9,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
     public class KeyActivator
     {
         public bool IsActivated { get; set; } = false;
+        public DateTime StartedAt { get; } = DateTime.UtcNow;
         public KeyActivator()
         {
         }

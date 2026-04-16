@@ -1,3 +1,4 @@
+using MyJetWallet.Fireblocks.Client.Auth;
 using MyJetWallet.Fireblocks.Client.Autofac;
 using MyJetWallet.Fireblocks.Client.Embedded;
 
@@ -5,6 +6,8 @@ namespace MyJetWallet.Fireblocks.Client
 {
     public class FireblocksEmbeddedClients
     {
+        public EmbeddedKeyActivators KeyActivators { get; }
+
         public IVaultClientAdmin VaultAdmin { get; }
         public IVaultClientSigner VaultSigner { get; }
         public IAccountsClientAdmin AccountsAdmin { get; }
@@ -24,10 +27,14 @@ namespace MyJetWallet.Fireblocks.Client
 
         public FireblocksEmbeddedClients(ClientConfigurator adminConfig, ClientConfigurator signerConfig)
         {
+            var adminActivator  = new KeyActivator();
+            var signerActivator = new KeyActivator();
+            KeyActivators = new EmbeddedKeyActivators(adminActivator, signerActivator);
+
             var baseUrlAdmin  = adminConfig.BaseUrl;
             var baseUrlSigner = signerConfig.BaseUrl;
-            var httpAdmin  = AutofacHelper.CreateHttpClient(adminConfig);
-            var httpSigner = AutofacHelper.CreateHttpClient(signerConfig);
+            var httpAdmin  = AutofacHelper.CreateHttpClient(adminConfig, adminActivator);
+            var httpSigner = AutofacHelper.CreateHttpClient(signerConfig, signerActivator);
 
             VaultAdmin           = new VaultClient(adminConfig, httpAdmin)           { BaseUrl = baseUrlAdmin };
             VaultSigner          = new VaultClient(signerConfig, httpSigner)         { BaseUrl = baseUrlSigner };

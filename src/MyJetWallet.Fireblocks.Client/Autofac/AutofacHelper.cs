@@ -276,6 +276,35 @@ namespace MyJetWallet.Fireblocks.Client.Autofac
             builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().WebhooksSigner).As<IWebhooksClientSigner>().SingleInstance();
             builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().EmbeddedWalletAdmin).As<IEmbeddedWalletAdminClient>().SingleInstance();
             builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().EmbeddedWalletSigner).As<IEmbeddedWalletSignerClient>().SingleInstance();
+            builder.Register(ctx => ctx.Resolve<FireblocksEmbeddedClients>().KeyActivators)
+                .As<EmbeddedKeyActivators>()
+                .SingleInstance();
+        }
+
+        public static HttpClient CreateHttpClient(
+            ClientConfigurator clientConfigurator,
+            KeyActivator keyActivator,
+            params DelegatingHandler[] handlers)
+        {
+            var baseUrl = clientConfigurator.BaseUrl;
+
+            if (string.IsNullOrEmpty(baseUrl))
+                throw new Exception("clientConfigurator.BaseUrl cannot be empty");
+
+            if (!baseUrl.Contains("/v1"))
+                throw new Exception("clientConfigurator.BaseUrl should be with /v1");
+
+            var auth = new ApiKeyHeaderGenerator(clientConfigurator, new JwtTokenGenerator(clientConfigurator, keyActivator), keyActivator);
+            var handlersWithAuth = new List<DelegatingHandler> { new NonceErrorHandler(), new AuthHandler(auth) };
+
+            keyActivator.ActivateKeys(clientConfigurator.ApiKey, clientConfigurator.ApiPrivateKey);
+
+            if (handlers != null && handlers.Any())
+            {
+                handlersWithAuth.AddRange(handlers);
+            }
+
+            return HttpClientFactory.Create(handlersWithAuth.ToArray());
         }
 
         public static HttpClient CreateHttpClient(ClientConfigurator clientConfigurator, params DelegatingHandler[] handlers)

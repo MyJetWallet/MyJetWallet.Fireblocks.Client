@@ -1,5 +1,52 @@
 ![Nuget version](https://img.shields.io/nuget/v/MyJetWallet.Fireblocks.Client?label=MyJetWallet.Fireblocks.Client&style=social)
 
+## Hot-reload key activation (AutoNazar integration)
+
+Services that use `RegisterEmbeddedFireblocksClientFromStorage` can rotate Fireblocks credentials at runtime
+without a pod restart by subscribing to AutoNazar key push notifications.
+
+### How it works
+
+`RegisterEmbeddedFireblocksClientFromStorage` now registers `EmbeddedKeyActivators` in the DI container.
+This object holds two `KeyActivator` instances — one for Admin credentials, one for Signer credentials.
+
+When AutoNazar pushes a new key via `INotificatorSubscriber`, the service calls `ActivateKeys()` on the
+matching activator. `JwtTokenGenerator` immediately swaps to the new RSA key (atomic swap — no request
+is dropped during rotation).
+
+### Service-side setup (ApplicationLifetimeManager)
+
+```csharp
+// Inject in constructor:
+private readonly EmbeddedKeyActivators _keyActivators;
+private readonly INotificatorSubscriber _notificatorSubscriber;
+
+// Subscribe in OnStarted():
+_notificatorSubscriber.Subscribe(key =>
+{
+    if (key.Id == Program.Settings.FireblocksAdminKeyId)
+        _keyActivators.Admin.ActivateKeys(key.ApiKeyValue, key.PrivateKeyValue);
+
+    if (key.Id == Program.Settings.FireblocksSignerKeyId)
+        _keyActivators.Signer.ActivateKeys(key.ApiKeyValue, key.PrivateKeyValue);
+});
+```
+
+### Settings required
+
+```
+FireblocksAdminKeyId  — AutoNazar key ID for admin credentials  (e.g. "embedded-fireblocks-admin-key")
+FireblocksSignerKeyId — AutoNazar key ID for signer credentials (e.g. "embedded-fireblocks-signer-key")
+```
+
+### Fallback behaviour
+
+If AutoNazar is unavailable at startup, credentials from environment variables (`FallbackAdminApiKey`,
+`FallbackAdminPrivateKey`, etc. in `EmbeddedFireblocksStorageOptions`) are used as initial values.
+The Notificator subscription will activate hot-reload as soon as AutoNazar becomes available.
+
+---
+
 Generate Fireblocks API Client flow
 
 1. Update api-spec-2.yaml
