@@ -106,7 +106,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
 
         public void Dispose()
         {
-            _rsa.Dispose();
+            _rsa?.Dispose();
             _keyActivator.KeyActivatedEvent -= Activate;
         }
     }
