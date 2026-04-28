@@ -95,6 +95,32 @@ namespace MyJetWallet.Fireblocks.Client.Tests
             Assert.Null(ex);
         }
 
+        [Fact]
+        public void ActivateKeys_NullCallback_KeepsIsActivatedFalse()
+        {
+            _keyActivator.ActivateKeys(null, null);
+
+            Assert.False(_keyActivator.IsActivated, "ActivateKeys with null/empty must NOT raise IsActivated — protects WaitForActivationAsync");
+        }
+
+        [Fact]
+        public void ActivateKeys_EmptyCallback_KeepsIsActivatedFalse()
+        {
+            _keyActivator.ActivateKeys(string.Empty, string.Empty);
+
+            Assert.False(_keyActivator.IsActivated);
+        }
+
+        [Fact]
+        public void ActivateKeys_PartialCredentials_KeepsIsActivatedFalse()
+        {
+            _keyActivator.ActivateKeys("api-key-only", null);
+            Assert.False(_keyActivator.IsActivated);
+
+            _keyActivator.ActivateKeys(null, _pkcs8Base64);
+            Assert.False(_keyActivator.IsActivated);
+        }
+
         private static HttpRequestMessage BuildRequest()
         {
             return new HttpRequestMessage

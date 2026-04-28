@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/MyJetWallet/MyJetWallet.Fireblocks.Client</RepositoryUrl>
     <PackageTags>Fireblocks MyJetWallet.Fireblocks.Client.Net C# .Net CryptoCurrency Wallet Exchange Rest API Wrapper</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>2.7.2</Version>
+    <Version>2.7.3</Version>
     <RootNamespace>MyJetWallet.Fireblocks.Client</RootNamespace>
   </PropertyGroup>
 
