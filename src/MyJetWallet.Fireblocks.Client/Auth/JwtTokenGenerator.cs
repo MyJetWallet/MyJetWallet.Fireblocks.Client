@@ -14,6 +14,7 @@ namespace MyJetWallet.Fireblocks.Client.Auth
     {
         private readonly ClientConfigurator _fireblocksConfiguration;
         private readonly KeyActivator _keyActivator;
+        private readonly object _activateLock = new();
         private volatile SigningCredentials _signingCredentials;
         private RSA _rsa;
 
@@ -57,31 +58,50 @@ namespace MyJetWallet.Fireblocks.Client.Auth
 
         internal void Activate(object sender, string apiKey, string privateKey)
         {
-            try
+            // Initial bootstrap callback may fire with empty values before storage loads — ignore
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(privateKey))
+                return;
+
+            lock (_activateLock)
             {
-                if (_signingCredentials != null
-                    && _fireblocksConfiguration.ApiKey == apiKey
-                    && _fireblocksConfiguration.ApiPrivateKey == privateKey)
-                    return;
+                try
+                {
+                    if (_signingCredentials != null
+                        && _fireblocksConfiguration.ApiKey == apiKey
+                        && _fireblocksConfiguration.ApiPrivateKey == privateKey)
+                    {
+                        _keyActivator.IsActivated = true;
+                        return;
+                    }
 
-                _fireblocksConfiguration.ApiKey = apiKey;
-                _fireblocksConfiguration.ApiPrivateKey = privateKey;
+                    var newRsa = RSA.Create();
+                    SigningCredentials newCredentials;
+                    try
+                    {
+                        newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(privateKey), out _);
+                        newCredentials = new SigningCredentials(new RsaSecurityKey(newRsa), SecurityAlgorithms.RsaSha256);
+                    }
+                    catch
+                    {
+                        newRsa.Dispose();
+                        throw;
+                    }
 
-                var newRsa = RSA.Create();
-                newRsa.ImportPkcs8PrivateKey(Convert.FromBase64String(privateKey), out _);
-                var newCredentials = new SigningCredentials(new RsaSecurityKey(newRsa), SecurityAlgorithms.RsaSha256);
+                    _fireblocksConfiguration.ApiKey = apiKey;
+                    _fireblocksConfiguration.ApiPrivateKey = privateKey;
+                    var oldRsa = _rsa;
+                    _rsa = newRsa;
+                    _signingCredentials = newCredentials;
+                    _keyActivator.IsActivated = true;
 
-                var oldRsa = _rsa;
-                _rsa = newRsa;
-                _signingCredentials = newCredentials;
-
-                if (oldRsa != null)
-                    Task.Run(async () => { await Task.Delay(30_000); oldRsa.Dispose(); });
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error during api key activation {e.Message}");
-                _keyActivator.IsActivated = false;
+                    if (oldRsa != null)
+                        Task.Run(async () => { await Task.Delay(30_000); oldRsa.Dispose(); });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error during api key activation {e.Message}");
+                    _keyActivator.IsActivated = false;
+                }
             }
         }
 
